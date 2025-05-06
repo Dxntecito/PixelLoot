@@ -1,0 +1,394 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Variables paleta de colores*/
+:root {
+    --bg-color1: #1D2025;
+    --bg-color2: #232933;
+    --bg-color3: #E0E0E0;
+    --bg-color4: #273649;
+    --bg-color5: #435E80;
+    --txt-color1: #E0E0E0;
+    --txt-color2: #1D2025;
+    --btn-color1: #71FF76;
+    --btn-color1-hover: #5eca65;
+    --btn-color2: #F7B226;
+
+    --title-font-family: eight-bits;
+    --body-font-family: "Ubuntu", sans-serif;
+}
+
+/*Exportar tipografía 8-bits*/
+@font-face {
+    font-family: eight-bits;
+    src: url(eight-bits.ttf);
+}
+
+/*Correcciones de bootstrap*/
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+ol, ul {
+    padding-left: 0;
+}
+
+/*Estilos para encabezado y Pie de Página*/
+body {
+    height: 100vh;
+    font-family: var(--body-font-family);
+    background-color: var(--bg-color2);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 80px 1fr 110px;
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+}
+
+/*Sección Header*/
+header {
+    grid-area: header;
+    background-color: var(--bg-color1);
+    text-align: center;
+    line-height: 80px;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-areas: "c1 c2 c3";
+}
+
+header a {
+    text-decoration: none;
+    color: var(--txt-color1);
+}
+
+header i {
+    color: var(--txt-color1);
+}
+
+/*Caja del logo*/
+#caja1 {
+    grid-area: c1;
+}
+
+#logo-pixel-header {
+    height: 90%;
+    width: auto;
+}
+
+/*Botón menú hamburguesa*/
+#menu-hamburguesa {
+    display: none;
+    height: 100%;
+    width: auto;
+    margin-left: auto;
+}
+
+#toggle {
+    display: none;
+    background: none;
+    border: none;
+}
+
+#toggle i {
+    font-size: 200%;
+}
+
+/*Menú responsivo*/
+#responsive-menu {
+    display: none;
+    grid-area: responive-menu;
+}
+
+/*Nav general de página*/
+#caja2 {
+    grid-area: c2;
+}
+
+#nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    padding-left: 0px;
+}
+
+#nav-menu li {
+    padding: 0 4%;
+}
+
+.nav-menu-links {
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: 0.5s ease;
+}
+
+.nav-menu-links:hover {
+    background-color: var(--bg-color3);
+    color: var(--bg-color1);
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+
+/*Perfil del usuario*/
+#caja3 {
+    grid-area: c3;
+}
+
+#user-icon {
+    font-size: 200%;
+}
+
+/*Acomodar tamaño de logo e icono*/
+#caja1, #caja3 {
+    width: 80px;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+/*Sub menú de usuario*/
+#user {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color3);
+    border-radius: 5px;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 20%;
+    height: 0;
+    overflow: hidden;
+    z-index: 10000;
+    transition: height 0.5s ease;
+}
+
+#user.active {
+    height: 210px;
+    z-index: 10000;
+}
+
+#user-menu {
+    list-style: none;
+    text-align: center;
+}
+
+#user-menu li {
+    height: 70px;
+    line-height: 70px;
+    text-transform: uppercase;
+}
+
+.user-menu-links {
+    font-size: 1rem;
+    color: var(--txt-color2);
+}
+
+/*Sección Main*/
+main {
+    background-color: var(--bg-color2);
+    color: var(--txt-color1);
+
+    padding: 50px 50px;
+}
+
+h1{
+    font-family: var(--title-font-family);
+}
+
+/*Sección Footer*/
+footer {
+    grid-area: footer;
+    background-color: var(--bg-color2); /*(switch palette)*/
+    display: grid;
+    grid-template-rows: 10px 100px;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+    "main-end main-end"
+    "copyright setting";
+}
+
+#main-end {
+    grid-area: main-end;
+    background-color: var(--bg-color1);
+}
+
+#copyright, #setting {
+    height: 100px;
+    width: 100%;
+    color: var(--txt-color1);
+    line-height: 100px;
+    font-size: 1rem;
+}
+
+#copyright {
+    grid-area: copyright;
+    padding: 0 0 0 50px;
+}
+
+#setting {
+    grid-area: setting;
+    gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 50px 0 0;
+}
+
+#setting i {
+    line-height: 100px;
+}
+
+#setting hr {
+    height: 20px;
+    align-self: center;
+    border: 1px solid var(--bg-color3);
+    opacity: 1;
+}
+
+.sub-setting {
+    display: flex;
+    padding: 0 10px;
+}
+
+/*Diseño Responsive*/
+
+/*ajustar tamaño de títulos nav*/
+@media (max-width: 900px) {
+    /*Sección Header*/
+    .nav-menu-links {
+        font-size: 0.80rem;
+    }
+
+    .user-menu-links {
+        font-size: 0.85rem;
+    }
+
+    /*Sección Footer*/
+    #copyright, #setting {
+        font-size: 0.85rem;
+    }
+}
+
+/*ajustar elementos a dispositivos móviles*/
+@media (max-width: 767px) {
+    /*Sección Header*/
+    header {
+        display: grid;
+        grid-template-rows: 100%;
+        grid-template-columns: 50% 50%;
+        grid-template-areas: "c1 - responive-menu";
+    }
+    
+    #caja1 {
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    #logo-pixel-header {
+        margin-left: 50px;
+    }
+
+    #menu-hamburguesa {
+        display: flex;
+        justify-content: center;
+    }  
+    
+    #toggle {
+        display: block;
+        margin-right: 30px;
+        line-height: normal;
+    }
+
+    #caja2, #caja3, #user {
+        display: none;
+    }
+
+    .nav-menu-links:hover {
+        color: #1D2025;
+        background-color: initial;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    #responsive-menu {
+        display: flex;
+        flex-direction: column;
+        background-color: #5C5B6D;
+        position: absolute;
+        top: 80px;
+        right: 0px;
+        width: 0px;
+        z-index: 10000;
+        height: calc(100% - 80px);
+        transition: width 0.5s ease;
+    }
+
+    #responsive-menu.active {
+        width: 300px;
+        z-index: 10000;
+    }
+
+    #nav-menu {
+        flex-direction: column;
+    }
+
+    #user-menu {
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+    }
+
+    .nav-menu-links {
+        font-size: 0.85rem;
+    }
+
+    .user-menu-links {
+        color: #E0E0E0;
+        transition: 0.5s ease;
+    }
+
+    .user-menu-links:hover {
+        color: #1D2025;
+    }
+
+    /*Sección Footer*/
+    footer {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 10px 50px 50px;
+        grid-template-areas: 
+        "main-end"
+        "copyright"
+        "setting";
+    }
+    
+    #copyright, #setting {
+        height: 50px;
+        line-height: 50px;
+        font-size: 0.85rem;
+    }
+    
+    #copyright {
+        text-align: center;
+        padding: 0;
+    }
+    
+    #setting {
+        justify-content: center;
+        padding: 0;
+    }
+    
+    #setting i {
+        line-height: 50px;
+    }
+}

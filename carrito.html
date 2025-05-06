@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelLoot</title>
+
+    <link rel="stylesheet" href="css/carritoPag.css">
+    <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
+
+    <!--Tipografía Ubuntu-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+</head>
+
+<body>
+
+    <header>
+        <!--Div del logo-->
+        <div id="caja1">
+            <a href="index.html">
+                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            </a>
+        </div>
+        
+        <!--Botón de menú hamburguesa-->
+        <div id="menu-hamburguesa">
+            <button id="toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!--Menú desplegable-->
+        <div id="responsive-menu">
+            <!-- contenido del menú responsive -->
+        </div>
+
+        <!--Nav general de página-->
+        <nav id="caja2">
+            <ul id="nav-menu">
+                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
+                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+            </ul>
+        </nav>
+        
+        <!--Perfil del usuario-->
+        <div id="caja3">
+            <a href="#" id="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+        <!--Sub menú de usuario-->
+        <div id="user">
+            <ul id="user-menu">
+                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="tuCarrito">
+            <section class="sec">
+                <h1 style="font-family: eight-bits; font-size: 45px; color: white;">
+                    Tu carrito
+                </h1>
+
+                <table id="carrito-items">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los elementos del carrito se agregarán aquí -->
+                    </tbody>
+                </table>
+
+                <div id="mensaje-eliminado">
+                    Tu juego ha sido eliminado. <button onclick="deshacerEliminar()">Deshacer</button>
+                </div>
+
+            </section>
+
+
+
+
+            <aside>
+                <div class="resumen-container">
+
+                    <div class="resumen-header">
+                        <h1 style="margin-top: 50px; ">Resumen de tu carrito</h1>
+                        <div class="botones">
+                            <button id="btn-detalles">Detalles</button>
+                            <button id="btn-pagar">Pagar</button>
+                        </div>
+
+                    </div>
+
+                    <div class="resumen-details" id="resumen-details">
+
+                        <div class="resumenPago">
+
+                            <div class="infoCarrito">
+                                <div class="subTotalPago">
+                                    <span>Sub total</span>
+                                    <span id="subTotal">0.00</span>
+                                </div>
+
+                                <div class="descuentoPago">
+                                    <span>Descuento</span>
+                                    <span>0.00</span>
+                                </div>
+
+                                <div class="pagoTotal">
+                                    <div>
+                                        <span>Total a pagar</span>
+
+                                    </div>
+
+                                    <div>
+                                        <span>S/</span>
+                                        <span id="total-pago-valor">0.00</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
+                            <div class="buyButton">
+                                <a href="confirmarCompra.html">
+                                    <button class="Btn">Ir a pagar
+                                        <svg class="svg" viewBox="0 0 24 24" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 2C6.477 2 2 6.477 2 12c0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm1 15v2h-2v-2c-2.21 0-4-1.79-4-4h2a2 2 0 1 0 4 0 2 2 0 0 0-1.724-1.972L9.027 10.27A3.988 3.988 0 0 1 8 8c0-2.21 1.79-4 4-4v-2h2v2c2.21 0 4 1.79 4 4h-2a2 2 0 1 0-4 0 2 2 0 0 0 1.724 1.972l2.249 1.258A3.988 3.988 0 0 1 16 16c0 2.21-1.79 4-4 4z" />
+                                        </svg>
+                                    </button>
+                                </a>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <br>
+
+
+
+
+                <div style="margin-left: 18%;" class="paymentMethod">
+                    <div style="display: flex; align-items: center; text-align: center;" class="metVisa">
+                        <input class="visa" type="checkbox">
+                        <img style="margin-top: 3%;" src="imagenes/metodoPago/VISA.png">
+                    </div>
+
+                    <div style="display: flex; align-items: center; text-align: center;" class="metPaypal">
+                        <input class="paypal" type="checkbox">
+                        <img style="margin-top: 3% ;" src="imagenes/metodoPago/paypal.png">
+                    </div>
+                    <div style="display: flex; align-items: center; text-align: center;" class="metPaysafe">
+                        <input class="paysafe" type="checkbox">
+                        <img style="margin-top: 3%;" src="imagenes/metodoPago/paysafe.png">
+                    </div>
+                    <div style="display: flex; align-items: center; text-align: center;" class="metMartercard">
+                        <input class="mastercard" type="checkbox">
+                        <img style="margin-top: 3%;" src="imagenes/metodoPago/mastercard.png">
+                    </div>
+                </div>
+
+
+                <div class="buyButton2">
+                    <a href="confirmarCompra.html">
+                        <button class="Btn2">Ir a pagar
+                            <svg class="svg2" viewBox="0 0 24 24" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.477 2 2 6.477 2 12c0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm1 15v2h-2v-2c-2.21 0-4-1.79-4-4h2a2 2 0 1 0 4 0 2 2 0 0 0-1.724-1.972L9.027 10.27A3.988 3.988 0 0 1 8 8c0-2.21 1.79-4 4-4v-2h2v2c2.21 0 4 1.79 4 4h-2a2 2 0 1 0-4 0 2 2 0 0 0 1.724 1.972l2.249 1.258A3.988 3.988 0 0 1 16 16c0 2.21-1.79 4-4 4z" />
+                            </svg>
+                        </button>
+                    </a>
+
+                </div>
+
+
+            </aside>
+
+            <section id="carrusel" class="carrusel">
+                <div class>
+                    <h1 style="color: white;">Otros juegos</h1>
+                </div>
+
+                <div class="products_body center">
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/1.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">God of war</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('God of war', 159.00, 'imagenes/1.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/2.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Dark Souls</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Dark Souls', 115.00, 'imagenes/2.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/3.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Days Gone</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Days Gone', 159.00, 'imagenes/3.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/4.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Resident Evil 4</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Resident Evil 4', 159.50, 'imagenes/4.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/5.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Resident Evil 2</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Resident Evil 2', 159.50, 'imagenes/5.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/6.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Celeste</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Celeste', 43.00, 'imagenes/6.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/7.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Tekken 8</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Tekken 8', 202.50, 'imagenes/7.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/8.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Sekiro</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Sekiro', 217.50, 'imagenes/8.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="container">
+                            <img class="top" src="imagenes/10.jpg" alt="">
+                            <div class="bottom">
+                                <div class="left">
+                                    <div class="details">
+                                        <h2 class="txt_products">Proyect Zomboid</h2>
+                                    </div>
+                                    <div class="buy">
+                                        <a style="cursor: pointer;">
+                                            <i onclick="agregarAlCarrito('Proyect Zomboid', 42.99, 'imagenes/10.jpg')"
+                                                class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
+        </div>
+
+
+
+        <!-- jquery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <!-- CDN -->
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script src="js/carritoPag.js"></script>
+        <script src="js/juegos.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/scriptTarjeta.js"></script>
+
+    </main>
+
+    <footer>
+        <div id="main-end">
+            &nbsp;
+        </div>
+        <div id="copyright">
+            <p>
+                Copyright © 2024 PixelLoot - All rights reserved
+            </p>
+        </div>
+        <div id="setting">
+            <div id="country" class="sub-setting">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>Perú</p>
+            </div>
+            <hr>
+            <div id="language" class="sub-setting">
+                <i class="fa-solid fa-language"></i>
+                <p>Español</p>
+            </div>
+            <hr>
+            <div id="coin" class="sub-setting">
+                <i class="fa-solid fa-coins"></i>
+                <p>PEN</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Variables paleta de colores*/
+:root {
+    --bg-color1: #1D2025;
+    --bg-color2: #232933;
+    --bg-color3: #E0E0E0;
+    --bg-color4: #273649;
+    --txt-color1: #E0E0E0;
+    --txt-color2: #1D2025;
+    --btn-color1: #71FF76;
+    --btn-color1-hover: #5eca65;
+    --btn-color2: #F7B226;
+
+    --title-font-family: eight-bits;
+    --body-font-family: "Ubuntu", sans-serif;
+}
+
+/*Exportar tipografía 8-bits*/
+@font-face {
+    font-family: eight-bits;
+    src: url(eight-bits.ttf);
+}
+
+/*Correcciones de bootstrap*/
+dl,
+ol,
+ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+ol,
+ul {
+    padding-left: 0;
+}
+
+/*Estilos para encabezado y Pie de Página*/
+body {
+    height: 100vh;
+    font-family: var(--body-font-family);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 80px 1fr 110px;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+/*Sección Header*/
+header {
+    grid-area: header;
+    background-color: var(--bg-color1);
+    text-align: center;
+    line-height: 80px;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-areas: "c1 c2 c3";
+}
+
+header a {
+    text-decoration: none;
+    color: var(--txt-color1);
+}
+
+header i {
+    color: var(--txt-color1);
+}
+
+/*Caja del logo*/
+#caja1 {
+    grid-area: c1;
+}
+
+#logo-pixel-header {
+    height: 90%;
+    width: auto;
+}
+
+/*Botón menú hamburguesa*/
+#menu-hamburguesa {
+    display: none;
+    height: 100%;
+    width: auto;
+    margin-left: auto;
+}
+
+#toggle {
+    display: none;
+    background: none;
+    border: none;
+}
+
+#toggle i {
+    font-size: 200%;
+}
+
+/*Menú responsivo*/
+#responsive-menu {
+    display: none;
+    grid-area: responive-menu;
+}
+
+/*Nav general de página*/
+#caja2 {
+    grid-area: c2;
+}
+
+#nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    padding-left: 0px;
+}
+
+#nav-menu li {
+    padding: 0 4%;
+}
+
+.nav-menu-links {
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: 0.5s ease;
+}
+
+.nav-menu-links:hover {
+    background-color: var(--bg-color3);
+    color: var(--bg-color1);
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+
+/*Perfil del usuario*/
+#caja3 {
+    grid-area: c3;
+}
+
+#user-icon {
+    font-size: 200%;
+}
+
+/*Acomodar tamaño de logo e icono*/
+#caja1,
+#caja3 {
+    width: 80px;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+/*Sub menú de usuario*/
+#user {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color3);
+    border-radius: 5px;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 20%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease;
+}
+
+#user.active {
+    height: 210px;
+}
+
+#user-menu {
+    list-style: none;
+    text-align: center;
+}
+
+#user-menu li {
+    height: 70px;
+    line-height: 70px;
+    text-transform: uppercase;
+}
+
+.user-menu-links {
+    font-size: 1rem;
+    color: var(--txt-color2);
+}
+
+/*Sección Main*/
+main {
+    grid-area: main;
+    padding: 65px;
+    background-color: #232933;
+    /*(switch palette)*/
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 570px 230px;
+    grid-template-areas:
+        "sec aside"
+        "carrusel carrusel";
+
+    .carrusel {
+        grid-area: carrusel;
+    }
+
+    h1 {
+        font-family: var(--title-font-family);
+    }
+
+    #carrito-items .btnCantidad .eliminar {
+        display: none !important;
+    }
+
+    thead {
+        border: none;
+    }
+
+    #carrito-container {
+        width: 100%;
+        margin-top: 20px;
+
+    }
+
+    #carrito-items {
+        width: 100%;
+        border-collapse: collapse;
+
+    }
+
+    #carrito-items th,
+    #carrito-items td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        color: white;
+        border: none;
+        font-weight: bold;
+    }
+
+
+
+    #carrito.items .contad {
+        display: flex;
+        justify-content: center;
+
+        gap: 25px;
+    }
+
+    #carrito-items th {
+        background-color: transparent;
+        border: none;
+
+    }
+
+    .carrito-item img {
+        width: 170px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .carrito-items .cantidad {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 26px;
+
+    }
+
+    .carrito-item .cantidad button {
+        padding: 5px;
+        background-color: rgb(102, 102, 102);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        gap: 50px;
+    }
+
+    .carrito-item button.eliminar {
+        padding: 5px 10px;
+        border: none;
+        background-color: #f00;
+        color: #030303;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .resumen-container {
+
+        display: block !important;
+        justify-content: center;
+        text-align: center !important;
+    }
+
+    .resumen-header .botones{
+        display: none !important;
+    }
+
+    .infoCarrito {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        display: block;
+    }
+
+    .infoCarrito div{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .infoCarrito div span {
+        font-size: 25px !important;
+        color: white;
+        
+    }
+
+    .subTotalPago span {
+        margin-right: 70px;
+        /* Ajusta el valor según sea necesario */
+    }
+
+    .subTotalPago span:last-child {
+        margin-right: 0;
+        /* Elimina el margen derecho del último elemento */
+    }
+
+    .descuentoPago span {
+        margin-right: 80px;
+        /* Ajusta el valor según sea necesario */
+    }
+
+    .descuentoPago span:last-child {
+        margin-right: 0;
+        /* Elimina el margen derecho del último elemento */
+    }
+
+    .pagoTotal {
+        display: flex;
+        gap: 50px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pagoTotal span {
+        font-size: 20px;
+        align-items: center;
+    }
+
+    .resumenPago .buyButton {
+        display: none;
+    }
+
+    .container-tarjetas2{
+        display: flex;
+        justify-content: center;
+        margin-top: 1%;
+        width: 80%;
+        margin-left: 8%;
+    }
+
+    .tarjetas-guardadas2{
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    .container-top-tarjetas2{
+        display: block !important;
+    }
+
+    .container-top-tarjetas2 .botonPagar{
+        display: flex;
+        margin-left: -20%;
+    }
+
+    .tarjetas-guardadas2 h3{
+        background-color: white !important;
+        width: auto !important;
+        border-radius: 10px;
+        height: auto !important;
+    }
+
+    .cajaTarjeta{
+        width: 100%;
+        display: block !important;
+    }
+
+    #tarjetas-list{
+        display: block !important;
+        margin-left: 10%;
+    }
+
+    .cajaTarjeta .addTarjeta{
+        display: flex;
+        margin-left: -5%;
+        align-items: center;
+        width: 110%;
+        justify-content: space-between;
+    }
+
+
+    
+
+
+    h1 {
+        font-family: var(--title-font-family);
+    }
+
+    #total-pago {
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: right;
+    }
+
+    .BtnPagar {
+        padding: 10px 20px;
+        text-transform: uppercase;
+        border-radius: 8px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #ffffff80;
+        text-shadow: none;
+        background: transparent;
+        cursor: pointer;
+        box-shadow: transparent;
+        border: 1px solid #ffffff80;
+        transition: 0.5s ease;
+        user-select: none;
+    }
+
+    .BtnPagar:hover,
+    .BtnPagar:focus {
+        color: #ffffff;
+        background: #00ff00;
+        /* Color verde de fondo */
+        border: 1px solid #00ff00;
+        /* Color verde del borde */
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+        box-shadow: 0 0 5px #00ff00, 0 0 20px #00ff00, 0 0 50px #00ff00,
+            0 0 100px #00ff00;
+        /* Sombras verdes */
+    }
+
+    .addTarjeta {
+        padding: 10px 20px;
+        text-transform: uppercase;
+        border-radius: 8px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #ffffff80;
+        text-shadow: none;
+        background: transparent;
+        cursor: pointer;
+        box-shadow: transparent;
+        border: 1px solid #ffffff80;
+        transition: 0.5s ease;
+        user-select: none;
+    }
+
+    .addTarjeta:hover,
+    .addTarjeta:focus {
+        color: #ffffff;
+        background: #001f3f;
+        /* Color azul noche de fondo */
+        border: 1px solid #001f3f;
+        /* Color azul noche del borde */
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+        box-shadow: 0 0 5px #001f3f, 0 0 20px #001f3f, 0 0 50px #001f3f,
+            0 0 100px #001f3f;
+        /* Sombras azul noche */
+    }
+
+
+
+
+
+    /* Apartado de tarjetas añadidas */
+
+    .container-tarjetas {
+        margin-top: 5%;
+        text-align: center;
+        width: 80%;
+        height: 30%;
+        margin-left: 10%;
+        margin-right: 10%;
+
+        border-radius: 20px;
+        align-items: center;
+    }
+
+
+    .container-tarjetas .container-top-tarjetas {
+        /* background-color: rgb(255, 4, 4); */
+        justify-content: center;
+
+        width: 54%;
+        height: 16%;
+        border-radius: 30px;
+        margin-left: 23%;
+        margin-top: -2%;
+
+    }
+
+    .container-tarjetas .container-top-tarjetas h3 {
+        background-color: white;
+        height: auto !important;
+        width: auto !important;
+        border-radius: 15px 15px 15px 15px;
+    }
+
+
+    .container-top-tarjetas .addTarjeta {
+        font-size: 50px;
+        border: none;
+        width: 160%;
+        margin-left: -25%;
+        align-items: center;
+        justify-content: space-between;
+        background-color: transparent;
+        color: white;
+        cursor: pointer;
+    }
+
+    aside {
+        display: block;
+    }
+
+    aside .botonPagar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3%;
+    }
+
+
+
+
+    /* Contenido de las tarjetas guardadas */
+
+    .tarjetas-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border: 2px solid rgb(221, 221, 221);
+    }
+
+    .listaTarjetas {
+        width: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: -50px;
+        color: white;
+    }
+
+    .listaTarjetas button {
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+
+    .tarjeta-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .tarjeta-item img {
+        width: 50px;
+        height: 30px;
+        margin-right: 10px;
+    }
+
+    .tarjeta-item span {
+        margin-right: 10px;
+    }
+
+    .eliminar-tarjeta {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+
+
+
+
+    /* Apartado tarjeta flotante */
+    .ui {
+        border: 0;
+        box-shadow: 0 0 10 ´x 0 rgba(255, 0, 0, 0.5);
+        border-radius: 10px;
+        width: 80%;
+        height: 460px;
+        margin: -25% 20%;
+        padding: 2.5%;
+        display: flex;
+        gap: 20px;
+        background-color: rgb(80, 80, 80);
+        display: none;
+
+    }
+
+
+    .container-top h3 {
+        width: 100%;
+        text-align: center;
+        height: 50%;
+        color: white;
+
+    }
+
+
+    .credit-card .data {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 50px;
+    }
+
+
+    #name-text,
+    #card-number,
+    #valid-date,
+    #cvv-text {
+        border-radius: 8px;
+        height: 40px;
+        width: 300px;
+        margin-bottom: 20px;
+        border: none !important;
+    }
+
+    .card-container {
+        background: transparent !important;
+        box-shadow: 0.5s;
+        color: white;
+    }
+
+    /* .intern{
+        background-color: chartreuse;
+        height: 30px;
+    } */
+
+    .card {
+        background-color: #001694;
+        /* Color de fondo claro */
+        padding: 20px;
+        /* Más espacio alrededor del contenido */
+        width: 45%;
+        /* Ancho más reducido para una apariencia más compacta */
+        margin: 20px auto;
+        /* Centrado horizontal con márgenes superior e inferior */
+        border-radius: 10px;
+        /* Bordes más suaves */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Sombra sutil para efecto de elevación */
+        border: 1px solid #0155d4;
+        /* Borde claro para mayor definición */
+        height: auto;
+        /* Altura automática para ajustar al contenido */
+        transition: transform 0.2s;
+        /* Animación de transición para efectos */
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        /* Efecto de elevación al pasar el cursor */
+    }
+
+
+
+    .imgs-card {
+        display: flex !important;
+        margin-top: 36px;
+        margin-left: 15px;
+    }
+
+    .signal img {
+        rotate: 90deg !important;
+    }
+
+    .card-infos .caducidad .expiration-v1 {
+        float: right;
+        margin-right: 35%;
+        margin-top: 3px;
+    }
+
+    .card-infos .exp {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .caducidad {
+        margin-top: 15px;
+    }
+
+    .credit-card #add {
+        margin-top: -2%;
+        width: 100%;
+        height: 28px;
+        background-color: orange;
+        border: none !important;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold !important;
+    }
+
+    #add:hover {
+        transition: transform 0.5s;
+    }
+
+    aside {
+
+        margin-left: 50px;
+    }
+
+    aside h1 {
+        color: white;
+        text-align: center;
+    }
+
+
+    aside h2 {
+        text-align: center;
+        padding: 10px;
+        color: white;
+        font-size: 20px;
+    }
+
+    /* Animaciones */
+    .listaTarjetas {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid transparent;
+        cursor: pointer;
+    }
+
+    .listaTarjetas.selected {
+        border: 1px solid #000;
+        background-color: #f0f0f0;
+    }
+
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    #mensaje-pago {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border: 2px solid #000;
+        z-index: 1000;
+        text-align: center;
+    }
+
+
+}
+
+
+/*Sección Footer*/
+footer {
+    grid-area: footer;
+    background-color: var(--bg-color2);
+    /*(switch palette)*/
+    display: grid;
+    grid-template-rows: 10px 100px;
+    grid-template-columns: 50% 50%;
+    grid-template-areas:
+        "main-end main-end"
+        "copyright setting";
+}
+
+#main-end {
+    grid-area: main-end;
+    background-color: var(--bg-color1);
+}
+
+#copyright,
+#setting {
+    height: 100px;
+    width: 100%;
+    color: var(--txt-color1);
+    line-height: 100px;
+    font-size: 1rem;
+}
+
+#copyright {
+    grid-area: copyright;
+    padding: 0 0 0 50px;
+}
+
+#setting {
+    grid-area: setting;
+    gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 50px 0 0;
+}
+
+#setting i {
+    line-height: 100px;
+}
+
+#setting hr {
+    height: 20px;
+    align-self: center;
+    border: 1px solid var(--bg-color3);
+    opacity: 1;
+}
+
+.sub-setting {
+    display: flex;
+    padding: 0 10px;
+}
+
+/*Diseño Responsive*/
+
+/*ajustar tamaño de títulos nav*/
+@media (max-width: 900px) {
+
+    /*Sección Header*/
+    .nav-menu-links {
+        font-size: 0.80rem;
+    }
+
+    .user-menu-links {
+        font-size: 0.85rem;
+    }
+
+    /*Sección Footer*/
+    #copyright,
+    #setting {
+        font-size: 0.85rem;
+    }
+}
+
+/*ajustar elementos a dispositivos móviles*/
+@media (max-width: 767px) {
+
+    /*Sección Header*/
+    header {
+        display: grid;
+        grid-template-rows: 100%;
+        grid-template-columns: 50% 50%;
+        grid-template-areas: "c1 - responive-menu";
+    }
+
+    #caja1 {
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    #logo-pixel-header {
+        margin-left: 50px;
+    }
+
+    #menu-hamburguesa {
+        display: flex;
+        justify-content: center;
+    }
+
+    #toggle {
+        display: block;
+        margin-right: 30px;
+        line-height: normal;
+    }
+
+    #caja2,
+    #caja3,
+    #user {
+        display: none;
+    }
+
+    .nav-menu-links:hover {
+        color: #1D2025;
+        background-color: initial;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    #responsive-menu {
+        display: flex;
+        flex-direction: column;
+        background-color: #5C5B6D;
+        position: absolute;
+        top: 80px;
+        right: 0px;
+        width: 0px;
+        height: calc(100% - 80px);
+        transition: width 0.5s ease;
+    }
+
+    #responsive-menu.active {
+        width: 300px;
+        z-index: 1000;
+    }
+
+    #nav-menu {
+        flex-direction: column;
+    }
+
+    #user-menu {
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+    }
+
+    .nav-menu-links {
+        font-size: 0.85rem;
+    }
+
+    .user-menu-links {
+        color: #E0E0E0;
+        transition: 0.5s ease;
+    }
+
+    .user-menu-links:hover {
+        color: #1D2025;
+    }
+
+    /* Seccion main */
+
+    main {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr 130px;
+        grid-template-areas:
+            "sec"
+            "form"
+        ;
+
+        /* Seccion main */
+
+
+        grid-area: main;
+        padding: 65px;
+        background-color: #232933;
+        /*(switch palette)*/
+
+        .container-tarjetas {
+            display: none !important;
+        }
+
+        .card-container {
+            grid-area: form;
+        }
+
+        .resumen-header .botones{
+            display: block !important;
+        }
+
+
+        .resumen-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #6e6e6e;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #fff;
+            z-index: 1000;
+            /* Asegura que esté encima de todo */
+            transition: height 0.3s;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+        }
+
+        .resumen-header {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 10%;
+
+            align-items: center;
+
+        }
+
+        .resumen-header h1 {
+            font-family: var(--title-font-family);
+            font-size: 18px;
+            color: white;
+        }
+
+        .resumen-header button {
+            background-color: transparent !important;
+            border: transparent;
+            color: white !important;
+            cursor: pointer;
+            margin-left: 10px;
+            margin-top: 33%;
+        }
+
+        .resumen-details {
+            display: none;
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            width: 100%;
+            background-color: #575757;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            z-index: 999;
+            
+        }
+
+
+        .ui {
+            width: 80%;
+            margin-left: 12%;
+            margin-bottom: 30%;
+        }
+
+        .one {
+            margin-left: -10%;
+        }
+
+        .two {
+            margin-right: -10%
+        }
+
+        #name-text,
+        #card-number,
+        #valid-date,
+        #cvv-text {
+            width: 100%;
+        }
+
+
+        .card {
+            width: 80%;
+            height: 50%;
+        }
+
+        .card .intern .card-infos .exp label {
+            font-size: 90%;
+        }
+
+        .resumenPago{
+            
+            justify-content: space-between;
+        }
+
+        .infoCarrito {
+            width: 30%;
+        }
+
+        .infoCarrito .subTotalPago {
+            display: flex !important;
+            justify-content: space-between;
+            margin-left: 3%;
+            
+            color: white !important;
+        }
+
+        .infoCarrito .subTotalPago div span{
+            font-size: 1px;
+            color: rgb(255, 255, 255) !important;
+        }
+        
+        .infoCarrito .descuentoPago {
+            display: flex !important;
+            justify-content: space-between;
+            margin-left: 3%;
+            
+            color: white !important;
+        }
+
+        .infoCarrito .pagoTotal {
+            display: flex !important;
+            justify-content: space-between;
+            margin-left: 3%;
+            
+            color: white !important;
+        }
+
+        .resumenPago {
+            display: flex;
+            align-items: center !important;
+
+        }
+
+        .resumenPago .buyButton {
+
+            margin-bottom: 4%;
+        }
+
+
+        .container-tarjetas2{
+            width: 100%;
+            display: flex !important;
+            text-align: center;
+            margin-right: 30%;
+        }
+
+        .botonPagar{
+            margin-left: -30%;
+        }
+        .addTarjeta{
+
+        }
+
+
+        /* .resumenPago .descuentoPago{
+        display: block !important;
+        width: 350px;
+       
+    }
+
+    .resumenPago .subTotalPago, .resumenPago .descuentoPago, .resumenPago .pagoTotal  {
+        color: white !important;
+        font-size: 16px;
+    }
+
+    
+
+    .subTotalPago {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .subTotalPago span {
+        flex: 30; /* Ajusta según sea necesario para controlar el espaciado */
+
+        /* } */
+
+
+
+        .Btn {
+            background-color: #32fd0a;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .Btn svg {
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+    }
+
+    #carrito-items thead tr{
+       display: block !important;
+    }
+
+    .datosCart{
+        display: inline-block;
+        
+    }
+
+    /*Sección Footer*/
+    footer {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 10px 50px 50px;
+        grid-template-areas:
+            "main-end"
+            "copyright"
+            "setting";
+    }
+
+    #copyright,
+    #setting {
+        height: 50px;
+        line-height: 50px;
+        font-size: 0.85rem;
+    }
+
+    #copyright {
+        text-align: center;
+        padding: 0;
+    }
+
+    #setting {
+        justify-content: center;
+        padding: 0;
+    }
+
+    #setting i {
+        line-height: 50px;
+    }
+}
+

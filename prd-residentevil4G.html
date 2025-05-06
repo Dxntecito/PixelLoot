@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelLoot | Resident evil 4:Gold edition</title>
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
+    <!--Vincular Css-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos1.css">
+    <link rel="stylesheet" href="css/estilos2.css">
+    <!--Tipografía Ubuntu-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+        /* Estilos básicos para la animación y el overlay */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+        }
+
+        #circular-animation {
+            margin-top: 1%;
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background-color: transparent transparent transparent;
+            border-radius: 50%;
+            line-height: 100px;
+            z-index: 1001;
+            font-size: 12px;
+            font-weight: bold;
+            display: block;
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        #circular-animation p{
+            width: 300px;
+            margin-left: -100%;
+            font-size: 20px;
+            color: white;
+        }
+
+        #circular-animation-message {
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            width: 80%;
+            height: 5%;
+            margin-top: 20%;
+            margin-left: 10%;
+            background-color: #0e0f46;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            z-index: 1002;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <!--Div del logo-->
+        <div id="caja1">
+            <a href="index.html">
+                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            </a>
+        </div>
+
+        <!--Botón de menú hamburguesa-->
+        <div id="menu-hamburguesa">
+            <button id="toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!--Menú desplegable-->
+        <div id="responsive-menu">
+            <!-- contenido del menú responsive -->
+        </div>
+
+        <!--Nav general de página-->
+        <nav id="caja2">
+            <ul id="nav-menu">
+                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
+                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+            </ul>
+        </nav>
+
+        <!--Perfil del usuario-->
+        <div id="caja3">
+            <a href="#" id="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+        <div id="overlay" style="display: none;"></div>
+        <div id="circular-animation" style="display: none;"> <p>Ingresa a tu carrito</p></div>
+        <div id="circular-animation-message" style="display: none;">Producto añadido a tu carrito</div>
+        <!--Sub menú de usuario-->
+        <div id="user">
+            <ul id="user-menu">
+                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="producto-container">
+            <div class="prd-carrusel">
+                <div class="slider">
+                    <div class="slide"><img src="imagenes/14.jpg" alt="Resident Evil 4"></div>
+                    <div class="slide"><img src="imagenes/Screen Game/re4_t1.jpg" alt=""></div>
+                    <div class="slide"><img src="imagenes/Screen Game/re4_t2.jpg" alt=""></div>
+                    <div class="slide"><img src="imagenes/Screen Game/re4_t3.jpg" alt=""></div>
+                    <button class="prev">&#10094;</button>
+                    <button class="next">&#10095;</button>
+                    <div class="dots"></div>
+                </div>
+                <div class="miniaturas">
+                    <div class="miniatura"><img src="imagenes/14.jpg" alt="Resident Evil 4"></div>
+                    <div class="miniatura"><img src="imagenes/Screen Game/re4_t1.jpg" alt="Imagen 2"></div>
+                    <div class="miniatura"><img src="imagenes/Screen Game/re4_t2.jpg" alt="Imagen 3"></div>
+                    <div class="miniatura"><img src="imagenes/Screen Game/re4_t3.jpg" alt="Imagen 4"></div>
+                </div>
+            </div>
+            <div class="prd-informacion">
+                <h1>Resident evil 4: Gold edition</h1>
+                <br>
+                <p>
+                    Lleva la aclamada aventura de Leon S. Kennedy a nuevas alturas con contenido adicional exclusivo.
+                    Esta edición incluye el juego completo junto con todos los DLC lanzados previamente, ofreciendo una
+                    experiencia completa y ampliada. Entre las mejoras destacan nuevas misiones adicionales que
+                    profundizan en la historia, trajes y armas exclusivas que proporcionan ventajas tácticas y
+                    estéticas, y modos de juego adicionales que desafiarán a los jugadores más experimentados.
+                </p>
+                <br>
+                <div class="tem_juegos">
+                    <button class="tem_juego">Zombies</button>
+                    <button class="tem_juego">Terror</button>
+                    <button class="tem_juego">Supervivencia</button>
+                    <button class="tem_juego">Un Jugador</button>
+                </div>
+                <br>
+                <div class="tem_juegos">
+                    <button class="tem_juego tem_juego_2">
+                        <i class="fa-brands fa-steam"></i>
+                        &nbsp; En Stock
+                    </button>
+                    <button class="tem_juego tem_juego_3">
+                        <b>Precio: S/.190.90</b>
+                    </button>
+                </div>
+                <br>
+                <div class="tem_juegos">
+                    <button class="tem_juego tem_juego_4">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <button onclick="agregarAlCarritoAnimado('Resident Evil 4:Gold edition', 190.90, 'imagenes/14.jpg')"
+                        class="tem_juego tem_juego_2">
+                        Añadir al Carrito
+                        &nbsp; <i class="fa-solid fa-cart-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="prd-similares">
+                <div class="tem_juegos tem_juegos_2">
+                    <h2>Títulos Similares</h2>
+                    <button class="tem_juego">Ver Todo</button>
+                </div>
+                <br>
+                <div class="game-cards">
+                    <div class="game-card">
+                        <img class="ima" src="imagenes/pq/re2.jpg" alt="Game 1">
+                        <div class="discount">-70%</div>
+                        <h3><a href="prd-residentevil2.html">Resident evil 2</a></h3>
+                    </div>
+                    <div class="game-card">
+                        <img src="imagenes/pq/daysgone.jpg" alt="Game 2">
+                        <div class="discount">-45%</div>
+                        <h3><a href="prd-daysgone.html">Days Gone</a></h3>
+                    </div>
+                    <div class="game-card">
+                        <img src="imagenes/pq/darksoul3.jpg" alt="Game 3">
+                        <div class="discount">-60%</div>
+                        <h3>Dark Souls 3</h3>
+                    </div>
+                    <div class="game-card">
+                        <img src="imagenes/pq/sekiro.jpg" alt="Elden Ring">
+                        <div class="discount">-60%</div>
+                        <h3><a href="#">Sekiro</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="prd-requisitos">
+                <h2>Requisitos</h2>
+                <hr>
+                <ul>
+                    <li>
+                        <b>Procesador: </b>&nbsp; Intel® Core™ i7-10460 / AMD FX™-4300 / Similares
+                    </li>
+                    <li>
+                        <b>Memoria: </b>&nbsp; 16GB RAM
+                    </li>
+                    <li>
+                        <b>Gráficos: </b>&nbsp; NVIDIA® GeForce® GTX 1650TI / AMD Radeon™ RX 560
+                    </li>
+                    <li>
+                        <b>Almacenamiento: </b>&nbsp; 60GB disponibles
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div id="main-end">
+            &nbsp;
+        </div>
+        <div id="copyright">
+            <p>
+                Copyright © 2024 PixelLoot - All rights reserved
+            </p>
+        </div>
+        <div id="setting">
+            <div id="country" class="sub-setting">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>Perú</p>
+            </div>
+            <hr>
+            <div id="language" class="sub-setting">
+                <i class="fa-solid fa-language"></i>
+                <p>Español</p>
+            </div>
+            <hr>
+            <div id="coin" class="sub-setting">
+                <i class="fa-solid fa-coins"></i>
+                <p>PEN</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/pro.js"></script>
+</body>
+
+</html>

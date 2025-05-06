@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelLoot | Contáctanos</title>
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
+    <!--Vincular Css-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos1.css">
+    <link rel="stylesheet" href="css/estilos2.css">
+    <!--Tipografía Ubuntu-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!--Div del logo-->
+        <div id="caja1">
+            <a href="index.html">
+                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            </a>
+        </div>
+        
+        <!--Botón de menú hamburguesa-->
+        <div id="menu-hamburguesa">
+            <button id="toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!--Menú desplegable-->
+        <div id="responsive-menu">
+            <!-- contenido del menú responsive -->
+        </div>
+
+        <!--Nav general de página-->
+        <nav id="caja2">
+            <ul id="nav-menu">
+                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
+                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+            </ul>
+        </nav>
+        
+        <!--Perfil del usuario-->
+        <div id="caja3">
+            <a href="#" id="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+        <div id="overlay"></div>
+        <div id="circular-animation"></div>
+        <div id="circular-animation-message">Ingresa a tu carrito</div>
+        <!--Sub menú de usuario-->
+        <div id="user">
+            <ul id="user-menu">
+                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div id="contactanos-container">
+            <h1>Contáctanos</h1>
+            <br>
+            <p>
+                Valoramos la comunicación abierta y directa con nuestros clientes. Si tienes alguna pregunta, comentario o necesitas asistencia, no dudes en ponerte en contacto con nosotros.
+            </p>
+            <div id="ctos-contact">
+                <form id="ctos-form-contact">
+                    <input type="email" class="form-control txt-custom" id="exampleFormControlInput1" placeholder="Correo Electrónico--" required>
+                    <br>
+                    <textarea class="form-control txt-area-custom" id="exampleFormControlTextarea1" placeholder="Mensaje--" rows="10" required></textarea>
+                    <br>
+                    <button class="btn btn-custom">Enviar Mensaje</button>
+                </form>
+                <div id="ctos-social-medias">
+                    <h5>O encuéntranos en nuestras redes sociales</h5>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="fa-brands fa-facebook"></i>
+                                PixelLoot
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-brands fa-instagram"></i>
+                                @pixel_loot
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/962756933">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                +51 962756933
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div id="main-end">
+            &nbsp;
+        </div>
+        <div id="copyright">
+            <p>
+                Copyright © 2024 PixelLoot - All rights reserved
+            </p>
+        </div>
+        <div id="setting">
+            <div id="country" class="sub-setting">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>Perú</p>
+            </div>
+            <hr>
+            <div id="language" class="sub-setting">
+                <i class="fa-solid fa-language"></i>
+                <p>Español</p>
+            </div>
+            <hr>
+            <div id="coin" class="sub-setting">
+                <i class="fa-solid fa-coins"></i>
+                <p>PEN</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
