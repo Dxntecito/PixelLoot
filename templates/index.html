@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelLoot | Página Principal</title>
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
+    <!--Vincular Css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
+    <!--Tipografía Ubuntu-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!--Div del logo-->
+        <div id="caja1">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
+            </a>
+        </div>
+        
+        <!--Botón de menú hamburguesa-->
+        <div id="menu-hamburguesa">
+            <button id="toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!--Menú desplegable-->
+        <div id="responsive-menu">
+            <!-- contenido del menú responsive -->
+        </div>
+
+        <!--Nav general de página-->
+        <nav id="caja2">
+            <ul id="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
+            </ul>
+        </nav>
+        
+        <!--Perfil del usuario-->
+        <div id="caja3">
+            <a href="#" id="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+        <div id="overlay"></div>
+        <div id="circular-animation"></div>
+        <div id="circular-animation-message">Ingresa a tu carrito</div>
+        <!--Sub menú de usuario-->
+        <div id="user">
+            <ul id="user-menu">
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
+            </ul>
+        </div>        
+    </header>
+    <main>
+        <div id="principal-container">
+            <div id="prn-proximos">
+                <h2 class="medina">Títulos Próximos</h2>
+                <div class="prn-titulo">
+                    <div class="img-container2">
+                        <img src="{{ url_for('static', filename='imagenes/MenuPrincipalyPerfil/gta6.jpg') }}" alt="GTA VI">
+                    </div>
+                    <div class="prn-texto">
+                        <p>Grand Theft Auto VI<br>2025</p>
+                    </div>
+                </div>
+                <div class="prn-titulo">
+                    <div class="img-container2">
+                        <img src="{{ url_for('static', filename='imagenes/MenuPrincipalyPerfil/Assasins.jpg') }}" alt="Assassin's Creed Shadows">
+                    </div>
+                    <div class="prn-texto">
+                        <p>Assassin's Creed Shadows<br>15 de noviembre de 2024</p>
+                    </div>
+                </div>
+                <div class="prn-titulo">
+                    <div class="img-container2">
+                        <img src="{{ url_for('static', filename='imagenes/MenuPrincipalyPerfil/black_ops_6.webp') }}" alt="Call of Duty: Black Ops 6">
+                    </div>
+                    <div class="prn-texto">
+                        <p>Call of Duty: Black Ops 6<br>4º trimestre de 2024</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="prn-productos">
+                <div id="p-destacados">
+                    <h3 class="medina">Destacados y Recomendados</h3>
+                    <div class="p-oferta-slider">
+                        <div class="p-oferta-wrapper">
+    
+                            <!-- Slide 1 -->
+                            <div class="p-oferta-slide">
+                                <div class="p-oferta-content">
+                                    <div class="p-oferta-principal">
+                                        <img id="img-2" src="{{ url_for('static', filename='imagenes/1.jpg') }}" alt="God of War">
+                                    </div>
+                                    <div class="p-oferta-recomendados">
+                                        <p><a href="{{ url_for('god_of_war') }}">God of War | S/.159.00</a></p>
+                                        <div class="p-oferta-imagenes">
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/1.jpg') }}" alt=""></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/god_t1.jpg') }}" alt=""></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/god_t2.jpg') }}" alt=""></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/god_t3.jpg') }}" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Slide 2 -->
+                            <div class="p-oferta-slide">
+                                <div class="p-oferta-content">
+                                    <div class="p-oferta-principal">
+                                        <img id="img-17" src="{{ url_for('static', filename='imagenes/6.jpg') }}" alt="Celeste">
+                                    </div>
+                                    <div class="p-oferta-recomendados">
+                                        <p><a href="{{ url_for('celeste') }}">Celeste | S/.43.00</a></p>
+                                        <div class="p-oferta-imagenes">
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/celeste_t1.webp') }}"></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/celeste_t1.webp') }}"></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/celeste_t2.webp') }}"></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/celeste_t2.webp') }}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Slide 3 -->
+                            <div class="p-oferta-slide">
+                                <div class="p-oferta-content">
+                                    <div class="p-oferta-principal">
+                                        <img id="img-9" src="{{ url_for('static', filename='imagenes/3.jpg') }}" alt="Days Gone">
+                                    </div>
+                                    <div class="p-oferta-recomendados">
+                                        <p><a href="{{ url_for('days_gone') }}">Days Gone | S/.159.00</a></p>
+                                        <div class="p-oferta-imagenes">
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/dy_t1.webp') }}"></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/dy_t1.webp') }}"></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/dy_t2.webp') }}"></div>
+                                            <div class="p-oferta-recomendado"><img src="{{ url_for('static', filename='imagenes/Screen Game/dy_t2.webp') }}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="p-oferta-controls">
+                            <button class="p-oferta-prev">&lt;</button>
+                            <button class="p-oferta-next">&gt;</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div id="p-ofertas">
+                    <h3 class="medina">Ofertas Especiales</h3>
+                    <div class="p-oferta-slider2">
+                        <div class="p-oferta-wrapper2 p-oferta-wrapper3">
+    
+                            <div class="p-oferta-slide2 p-oferta-slide3">
+                                <div class="p-oferta-content2 p-oferta-content3">
+                                    <div class="p-oferta-img-container">
+                                        <img src="{{ url_for('static', filename='imagenes/2.jpg') }}" alt="Cup Head">
+                                    </div>
+                                    <p><a href="{{ url_for('dark_souls') }}">Dark Souls</a><br><span>S/.115.00</span></p>
+                                </div>
+                            </div>
+    
+                            <div class="p-oferta-slide2 p-oferta-slide3">
+                                <div class="p-oferta-content2 p-oferta-content3">
+                                    <div class="p-oferta-img-container">
+                                        <img src="{{ url_for('static', filename='imagenes/4.jpg') }}" alt="Resident Evil 4">
+                                    </div>
+                                    <p><a href="{{ url_for('resident_evil_4') }}">Resident Evil 4</a><br><span>S/.159.50</span></p>
+                                </div>
+                            </div>
+    
+                            <div class="p-oferta-slide2 p-oferta-slide3">
+                                <div class="p-oferta-content2 p-oferta-content3">
+                                    <div class="p-oferta-img-container">
+                                        <img src="{{ url_for('static', filename='imagenes/5.jpg') }}" alt="Resident Evil 2">
+                                    </div>
+                                    <p><a href="{{ url_for('resident_evil_2') }}">Resident Evil 2</a><br><span>S/.149.60</span></p>
+                                </div>
+                            </div>
+    
+                            <div class="p-oferta-slide2 p-oferta-slide3">
+                                <div class="p-oferta-content2 p-oferta-content3">
+                                    <div class="p-oferta-img-container">
+                                        <img src="{{ url_for('static', filename='imagenes/6.jpg') }}" alt="Celeste">
+                                    </div>
+                                    <p><a href="{{ url_for('celeste') }}">Celeste</a><br><span>S/.43.00</span></p>
+                                </div>
+                            </div>
+    
+                            <div class="p-oferta-slide2 p-oferta-slide3">
+                                <div class="p-oferta-content2 p-oferta-content3">
+                                    <div class="p-oferta-img-container">
+                                        <img src="{{ url_for('static', filename='imagenes/8.jpg') }}" alt="Sekiro">
+                                    </div>
+                                    <p><a href="#">Sekiro</a><br><span>S/.217.50</span></p>
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="p-oferta-controls2">
+                            <button class="p-oferta-prev2">&lt;</button>
+                            <button class="p-oferta-next2">&gt;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div id="main-end">
+            &nbsp;
+        </div>
+        <div id="copyright">
+            <p>
+                Copyright © 2024 PixelLoot - All rights reserved
+            </p>
+        </div>
+        <div id="setting">
+            <div id="country" class="sub-setting">
+                <i class="fa-solid fa-location-dot"></i>
+                <p>Perú</p>
+            </div>
+            <hr>
+            <div id="language" class="sub-setting">
+                <i class="fa-solid fa-language"></i>
+                <p>Español</p>
+            </div>
+            <hr>
+            <div id="coin" class="sub-setting">
+                <i class="fa-solid fa-coins"></i>
+                <p>PEN</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scriptPrincipal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
