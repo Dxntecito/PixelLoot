@@ -1,70 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelLoot</title>
-
-    <link rel="stylesheet" href="css/confirmarCompraTarjeta.css">
+    <title>PixelLoot | Confirmar Compra</title>
+    <!-- SEO -->
+    <meta name="description" content="Confirma tu compra en PixelLoot y paga de forma segura con tarjeta.">
+    <meta name="keywords" content="PixelLoot, carrito, pago, tarjeta, videojuegos">
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
-
-    <!--Tipografía Ubuntu-->
+    <!-- Tipografía Ubuntu -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.default.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmarCompraTarjeta.css') }}">
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
-</head>
-
 <body>
-
     <header>
-        <!--Div del logo-->
+        <!-- Div del logo -->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
         
-        <!--Botón de menú hamburguesa-->
+        <!-- Botón de menú hamburguesa -->
         <div id="menu-hamburguesa">
-            <button id="toggle">
+            <button id="toggle" aria-label="Abrir menú">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
-        <!--Menú desplegable-->
+        <!-- Menú desplegable -->
         <div id="responsive-menu">
             <!-- contenido del menú responsive -->
         </div>
 
-        <!--Nav general de página-->
+        <!-- Nav general de página -->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
         
-        <!--Perfil del usuario-->
+        <!-- Perfil del usuario -->
         <div id="caja3">
-            <a href="#" id="user-icon">
+            <a href="#" id="user-icon" aria-label="Abrir menú de usuario">
                 <i class="fa-solid fa-user"></i>
             </a>
         </div>
-        <!--Sub menú de usuario-->
+        <div id="overlay"></div>
+        <div id="circular-animation"></div>
+        <div id="circular-animation-message">Ingresa a tu carrito</div>
+        <!-- Sub menú de usuario -->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>
@@ -74,230 +73,123 @@
             <h1 style="font-family: eight-bits; font-size: 45px; color: white;">
                 Confirmación de compra
             </h1>
-
-
             <div class="games">
                 <br><br>
                 <table id="carrito-items">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>Producto</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Los elementos del carrito se agregarán aquí -->
+                        {% for item in carrito %}
+                        <tr>
+                            <td><img src="{{ url_for('static', filename=item.imagen) }}" alt="{{ item.nombre }}" style="width: 50px;"></td>
+                            <td>{{ item.nombre }}</td>
+                            <td>S/. {{ item.precio }}</td>
+                            <td>{{ item.cantidad }}</td>
+                            <td>S/. {{ item.precio * item.cantidad }}</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
-
             <hr>
         </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!-- Owl Carousel JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
-
-
         <aside>
-
             <div class="resumen-container">
-
                 <div class="resumen-header">
-                    <h1 style="margin-top: 50px; ">Resumen de tu compra</h1>
+                    <h1 style="margin-top: 50px;">Resumen de tu compra</h1>
                     <div class="botones">
                         <button id="btn-detalles">Detalles</button>
                         <button id="btn-pagar">Pagar</button>
                     </div>
-
                 </div>
 
                 <div class="resumen-details" id="resumen-details">
-
                     <div class="resumenPago">
-
                         <div class="infoCarrito">
                             <div class="subTotalPago">
                                 <span>Sub total</span>
-                                <span id="subTotal">0.00</span>
+                                <span id="subTotal">S/. {{ subtotal }}</span>
                             </div>
-
                             <div class="descuentoPago">
                                 <span>Descuento</span>
-                                <span>0.00</span>
+                                <span>S/. {{ descuento }}</span>
                             </div>
-
                             <div class="pagoTotal">
                                 <div>
                                     <span>Total a pagar</span>
-
                                 </div>
-
                                 <div>
                                     <span>S/</span>
-                                    <span id="total-pago-valor">0.00</span>
+                                    <span id="total-pago-valor">{{ total }}</span>
                                 </div>
-
                             </div>
                         </div>
                         <br>
                         <div class="container-tarjetas2">
-
                             <div class="container-top-tarjetas2">
-
                                 <div class="container-body-tarjetas2">
                                     <div class="tarjetas-guardadas2">
                                         <h3>TARJETAS GUARDADAS</h3>
                                     </div>
-
                                     <div class="cajaTarjeta">
                                         <div id="tarjetas-list">
-
+                                            {% for tarjeta in tarjetas %}
+                                            <div class="tarjeta-item">
+                                                <p>{{ tarjeta.card_brand }} **** {{ tarjeta.card_last4 }} (Exp. {{ tarjeta.card_exp_month }}/{{ tarjeta.card_exp_year }})</p>
+                                            </div>
+                                            {% endfor %}
                                         </div>
-
-                                        <button class=" addTarjeta" onclick="mostrarFormulario()">
-                                            <img src="imagenes/metodoPago/agregar-tarjeta.png">
-                                            <p style="font-size: 14px;">Agregar tarjeta</p>
-                                        </button>
-
+                                        <form action="{{ url_for('confirmar_compra') }}" method="POST">
+                                            <input type="hidden" name="action" value="add_card">
+                                            <button type="submit" class="addTarjeta" aria-label="Agregar nueva tarjeta">
+                                                <img src="{{ url_for('static', filename='imagenes/metodoPago/agregar-tarjeta.png') }}" alt="Agregar tarjeta">
+                                                <p style="font-size: 14px;">Agregar tarjeta</p>
+                                            </button>
+                                        </form>
                                     </div>
-
-
-
                                 </div>
-
                                 <div class="botonPagar">
-                                    <button class="BtnPagar" onclick="realizarPago()">Pagar</button>
+                                    <form action="{{ url_for('confirmar_compra') }}" method="POST">
+                                        <input type="hidden" name="action" value="pay">
+                                        <button type="submit" class="BtnPagar" aria-label="Realizar pago">Pagar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
-
-
         </aside>
-
 
         <section class="tarjeta">
             <div class="container">
-
                 <section class="ui">
                     <div class="container-top">
                         <h3>INFORMACIÓN DE TU TARJETA</h3>
-                        <form class="credit-card">
-
-                            <div class="data">
-
-                                <div class="one">
-                                    <div class="name-container">
-                                        <input type="text" name="name-text" id="name-text" maxlength="30"
-                                            placeholder="Titular de la tarjeta" required
-                                            onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode <123) || event.key ==' '">
-                                    </div>
-
-                                    <div class="number-container">
-
-                                        <input type="text" name="card-number" id="card-number" maxlength="19"
-                                            placeholder="Número de tarjeta" required
-                                            onkeypress="return event.charCode >=48 && event.charCode <= 57">
-                                    </div>
-                                </div>
-
-                                <div class="two">
-                                    <div class="expiration-container">
-
-                                        <input type="text" name="valid-date" id="valid-date" maxlength="5"
-                                            placeholder="Caducidad de tarjeta" required
-                                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || [33, 64, 35, 36, 37, 94, 38, 42, 40, 41, 47].includes(event.charCode)">
-                                    </div>
-
-                                    <div class="cvv-container">
-
-                                        <input type="text" name="cvv-text" id="cvv-text" maxlength="4" placeholder="CVV"
-                                            required onkeypress="return event.charCode >=48 && event.charCode <= 57">
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="card-container">
-                                <div class="card">
-                                    <div class="intern">
-
-                                        <div class="card-name">
-                                            <div class="name-v1">NOMBRE TITULAR </div>
-                                        </div>
-
-                                        <div class="imgs-card">
-                                            <div class="chip">
-                                                <img class="chip" src="imagenes/confirmarCompra/chip.png" alt="">
-                                            </div>
-
-                                            <div class="signal">
-                                                <img class="signal" src="imagenes/confirmarCompra/signal.png" alt="">
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="card-infos">
-                                            <div class="exp">
-                                                <label class="number-v1"> XXXX XXXX XXXX XXXX
-                                                </label>
-                                                <label> VISA </label>
-                                            </div>
-
-                                            <div class="caducidad">
-                                                <div class="expiration-v1">MM/AA</div>
-                                            </div>
-
-
-                                            <div class="cvv">
-                                                <div class="cvv-1">###</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <button class="anadirTarjeta" onclick="guardarDatos(),recuperarDatos()" type="submit"
-                                value="Añadir Tarjeta" id="add">Añadir a la tarjeta</button>
-
-
+                        <form id="payment-form" action="{{ url_for('confirmar_compra') }}" method="POST">
+                            <input type="hidden" name="action" value="add_card">
+                            <div id="card-element"></div>
+                            <div id="card-errors" role="alert"></div>
+                            <button type="submit" class="anadirTarjeta" id="add">Añadir tarjeta</button>
                         </form>
-
                     </div>
-
                 </section>
             </div>
         </section>
-
-
     </main>
 
     <footer>
-        <div id="main-end">
-            &nbsp;
-        </div>
+        <div id="main-end"></div>
         <div id="copyright">
-            <p>
-                Copyright © 2024 PixelLoot - All rights reserved
-            </p>
+            <p>Copyright © 2024 PixelLoot - All rights reserved</p>
         </div>
         <div id="setting">
             <div id="country" class="sub-setting">
@@ -317,11 +209,41 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/scriptTarjeta.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        const stripe = Stripe('{{ stripe_publishable_key }}');
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
 
+        card.on('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
 
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const { paymentMethod, error } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: card,
+            });
 
+            if (error) {
+                document.getElementById('card-errors').textContent = error.message;
+            } else {
+                const actionInput = document.createElement('input');
+                actionInput.type = 'hidden';
+                actionInput.name = 'payment_method';
+                actionInput.value = paymentMethod.id;
+                form.appendChild(actionInput);
+                form.submit();
+            }
+        });
+    </script>
 </body>
-
 </html>

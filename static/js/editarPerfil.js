@@ -1,11 +1,11 @@
-
 let editMode = false;
 
-document.getElementById('editar-btn').addEventListener('click', function() {
+document.getElementById('editar-btn').addEventListener('click', async function () {
     const inputs = document.querySelectorAll('#prf-informacion .form-control');
     const selects = document.querySelectorAll('#prf-informacion .form-select');
-    
+
     if (!editMode) {
+        // Activar edición
         inputs.forEach(input => {
             input.removeAttribute('readonly');
             input.style.backgroundColor = 'rgba(224, 224, 224, 0.3)';
@@ -17,18 +17,44 @@ document.getElementById('editar-btn').addEventListener('click', function() {
         this.textContent = 'Confirmar Cambios';
         editMode = true;
     } else {
-        inputs.forEach(input => {
-            input.setAttribute('readonly', true);
-            input.style.backgroundColor = '#E0E0E0';
-        });
-        selects.forEach(select => {
-            select.setAttribute('disabled', true);
-            select.style.backgroundColor = '#E0E0E0';
-        });
-        this.textContent = 'Editar Información';
-        editMode = false;
+        // Recolectar datos
+        const data = {
+            username: document.getElementById('input-username').value,
+            nombre: document.getElementById('input-nombre').value,
+            correo: document.getElementById('input-correo').value,
+            password: document.getElementById('input-password').value,
+            telefono: document.getElementById('input-telefono').value,
+            genero: document.getElementById('input-genero').value,
+            pais: document.getElementById('pais-select').value,
+            fecha_nacimiento: "2000-01-01" // puedes hacerlo dinámico luego si lo necesitas
+        };
+
+        try {
+            const response = await fetch('/editar_perfil', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert("Cambios guardados correctamente! 💜");
+                // Forzar recarga para ver datos actualizados
+                window.location.reload();
+            } else {
+                alert("Error al guardar cambios: " + result.message);
+            }
+
+        } catch (error) {
+            console.error("Error en fetch:", error);
+            alert("Error de red al guardar cambios");
+        }
     }
 });
+
 
 document.getElementById('prf-imagenes-fondoPerfilInput').addEventListener('change', function() {
     const reader = new FileReader();

@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelLoot | Dark Souls</title>
+    <title>PixelLoot | {{ product.nombre }}</title>
+    <!-- SEO -->
+    <meta name="description" content="{{ product.descripcion | truncate(160) }}">
+    <meta name="keywords" content="{{ tags | join(', ') }}">
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +22,8 @@
     <header>
         <!--Div del logo-->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
         
@@ -39,10 +42,10 @@
         <!--Nav general de página-->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
         
@@ -58,117 +61,105 @@
         <!--Sub menú de usuario-->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>
     <main>
         <div class="producto-container">
             <div class="prd-carrusel">
-                <div class="slider">
-                    <div class="slide"><img src="imagenes/2.jpg" alt="Dark Souls"></div>
-                    <div class="slide"><img src="imagenes/Screen Game/drk1_t1.jpg" alt=""></div>
-                    <div class="slide"><img src="imagenes/Screen Game/drk1_t2.jpg" alt=""></div>
-                    <div class="slide"><img src="imagenes/Screen Game/drk1_t3.jpg" alt=""></div>
-                    <button class="prev">&#10094;</button>
-                    <button class="next">&#10095;</button>
+                <div class="slider" aria-label="Carrusel de imágenes de {{ product.nombre }}">
+                    <div class="slide"><img src="{{ url_for('static', filename=product.imagen) }}" alt="{{ product.nombre }}"></div>
+                    {% for img in product.imagenes_secundarias %}
+                    <div class="slide"><img src="{{ url_for('static', filename='imagenes/' + img) }}" alt=""></div>
+                    {% endfor %}
+                    <button class="prev">❮</button>
+                    <button class="next">❯</button>
                     <div class="dots"></div>
                 </div>
                 <div class="miniaturas">
-                    <div class="miniatura"><img src="imagenes/2.jpg" alt="Dark Souls"></div>
-                    <div class="miniatura"><img src="imagenes/Screen Game/drk1_t1.jpg" alt="Imagen 2"></div>
-                    <div class="miniatura"><img src="imagenes/Screen Game/drk1_t2.jpg" alt="Imagen 3"></div>
-                    <div class="miniatura"><img src="imagenes/Screen Game/drk1_t3.jpg" alt="Imagen 4"></div>
+                    <div class="miniatura"><img src="{{ url_for('static', filename=product.imagen) }}" alt="{{ product.nombre }}"></div>
+                    {% for img in product.imagenes_secundarias %}
+                    <div class="miniatura"><img src="{{ url_for('static', filename='imagenes/' + img) }}" alt="Imagen"></div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="prd-informacion">
-                <h1>Dark Souls</h1>
+                <h1>{{ product.nombre }}</h1>
                 <br>
-                <p>
-                    "Dark Souls" es un juego de rol de acción desarrollado por FromSoftware y lanzado en 2011. Conocido por su alta dificultad y su profunda narrativa ambiental, el juego lleva a los jugadores a un mundo oscuro y desafiante, lleno de monstruos letales, jefes intimidantes y trampas peligrosas.
-                </p>
+                <p>{{ product.descripcion }}</p>
                 <br>
                 <div class="tem_juegos">
-                    <button class="tem_juego">Rol</button>
-                    <button class="tem_juego">Dificil</button>
-                    <button class="tem_juego">Mundo Abierto</button>
-                    <button class="tem_juego">Un Jugador</button>
+                    {% for tag in tags %}
+                    <button class="tem_juego">{{ tag }}</button>
+                    {% endfor %}
                 </div>
                 <br>
                 <div class="tem_juegos">
                     <button class="tem_juego tem_juego_2">
                         <i class="fa-brands fa-steam"></i>
-                        &nbsp; En Stock
+                        {% if product.stock > 0 %} En Stock {% else %} Sin Stock {% endif %}
                     </button>
                     <button class="tem_juego tem_juego_3">
-                        <b>Precio: S/.115.10</b>
+                        <b>Precio: S/. {{ product.precio }}</b>
                     </button>
                 </div>
                 <br>
                 <div class="tem_juegos">
-                    <button class="tem_juego tem_juego_4">
-                        <i class="fa-solid fa-star"></i>
-                    </button>
-                    <button onclick="agregarAlCarritoAnimado('Dark Souls', 115.10, 'imagenes/2.jpg')" class="tem_juego tem_juego_2">
-                        Añadir al Carrito
-                        &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                    </button>
+                    <form action="{{ url_for('producto', id=product.id) }}" method="POST">
+                        <input type="hidden" name="action" value="add_to_wishlist">
+                        <button type="submit" class="tem_juego tem_juego_4" aria-label="Añadir {{ product.nombre }} a la lista de deseos">
+                            <i class="fa-solid fa-star"></i>
+                        </button>
+                    </form>
+                    <form action="{{ url_for('producto', id=product.id) }}" method="POST">
+                        <input type="hidden" name="action" value="add_to_cart">
+                        <button type="submit" class="tem_juego tem_juego_2" aria-label="Añadir {{ product.nombre }} al carrito">
+                            Añadir al Carrito
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="prd-similares">
                 <div class="tem_juegos tem_juegos_2">
                     <h2>Títulos Similares</h2>
-                    <button class="tem_juego">Ver Todo</button>
+                    <button class="tem_juego" aria-label="Ver todos los títulos similares">Ver Todo</button>
                 </div>
                 <br>
                 <div class="game-cards">
+                    {% for similar in similar_products %}
                     <div class="game-card">
-                        <img class="ima" src="imagenes/pq/god.jpg" alt="Game 1">
-                        <div class="discount">-60%</div>
-                        <h3><a href="prd-god.html">God of war</a></h3>
+                        <img src="{{ url_for('static', filename=similar.imagen) }}" alt="{{ similar.nombre }}">
+                        {% if similar.descuento %}
+                        <div class="discount">-{ { similar.descuento }}%</div>
+                        {% endif %}
+                        <h3><a href="{{ url_for('producto', id=similar.id) }}">{{ similar.nombre }}</a></h3>
                     </div>
-                    <div class="game-card">
-                        <img src="imagenes/pq/sekiro.jpg" alt="Game 2">
-                        <div class="discount">-55%</div>
-                        <h3><a href="">Sekiro</a></h3>
-                    </div>
-                    <div class="game-card">
-                        <img src="imagenes/pq/darksoul3.jpg" alt="Game 3">
-                        <div class="discount">-60%</div>
-                        <h3><a href="">Dark Souls 3</a></h3>
-                    </div>
-                    <div class="game-card">
-                        <img src="imagenes/pq/Celeste-pc-game-steam-key-from-zamve.com_.jpg" alt="Elden Ring">
-                        <div class="discount">-60%</div>
-                        <h3><a href="prd-celeste.html">Celeste</a></h3>
-                    </div>
-                </div>        
+                    {% endfor %}
+                </div>
             </div>
             <div class="prd-requisitos">
                 <h2>Requisitos</h2>
                 <hr>
                 <ul>
-                    <li>
-                        <b>Procesador: </b>&nbsp; Intel® Core™ i5-4460 / AMD FX™-6300 / Similares
-                    </li>
-                    <li>
-                        <b>Memoria: </b>&nbsp; 4GB RAM
-                    </li>
-                    <li>
-                        <b>Gráficos: </b>&nbsp; NVIDIA® GeForce® GTX 960 or AMD Radeon™ RX 460
-                    </li>
-                    <li>
-                        <b>Almacenamiento: </b>&nbsp; 15GB disponibles
-                    </li>
+                    {% if product.requisitos %}
+                    <li><b>Procesador: </b> {{ product.requisitos.procesador }}</li>
+                    <li><b>Memoria: </b> {{ product.requisitos.memoria }}</li>
+                    <li><b>Gráficos: </b> {{ product.requisitos.graficos }}</li>
+                    <li><b>Almacenamiento: </b> {{ product.requisitos.almacenamiento }}</li>
+                    {% else %}
+                    <li>No se especifican requisitos para este producto.</li>
+                    {% endif %}
                 </ul>
             </div>
-        </div> 
+        </div>
     </main>
     <footer>
         <div id="main-end">
-            &nbsp;
+             
         </div>
         <div id="copyright">
             <p>
@@ -193,8 +184,8 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/pro.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pro.js') }}"></script>
 </body>
 </html>

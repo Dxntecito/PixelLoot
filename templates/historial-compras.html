@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pág. Referencia (No Modificar Aquí)</title>
+    <title>PixelLoot | Historial de Compras</title>
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +19,8 @@
     <header>
         <!--Div del logo-->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
         
@@ -39,10 +39,10 @@
         <!--Nav general de página-->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
         
@@ -58,45 +58,45 @@
         <!--Sub menú de usuario-->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>
     <main>
-        <id id="historial-container">
+        <div id="historial-container">
             <h1>Historial de Compras</h1>
             <br>
             <table class="tbl-custom">
                 <thead>
-                  <tr>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Artículo</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Total</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Artículo</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Total</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">12/06/2023</th>
-                    <td>Resident Evil 2</td>
-                    <td>1</td>
-                    <td>S/. 149.60</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">13/02/2024</th>
-                    <td>Resident Evil 3</td>
-                    <td>1</td>
-                    <td>S/. 149.60</td>
-                  </tr>
+                    <tr>
+                        <th scope="row">12/06/2023</th>
+                        <td>Resident Evil 2</td>
+                        <td>1</td>
+                        <td>S/. 149.60</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">13/02/2024</th>
+                        <td>Resident Evil 3</td>
+                        <td>1</td>
+                        <td>S/. 149.60</td>
+                    </tr>
                 </tbody>
-              </table>
-        </id>
+            </table>
+        </div>
     </main>
     <footer>
         <div id="main-end">
-            &nbsp;
+             
         </div>
         <div id="copyright">
             <p>
@@ -121,7 +121,7 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

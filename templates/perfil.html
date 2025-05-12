@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,27 @@
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <header>
         <!--Div del logo-->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot"
+                    id="logo-pixel-header">
             </a>
         </div>
-        
+
         <!--Botón de menú hamburguesa-->
         <div id="menu-hamburguesa">
             <button id="toggle">
@@ -39,13 +44,13 @@
         <!--Nav general de página-->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
-        
+
         <!--Perfil del usuario-->
         <div id="caja3">
             <a href="#" id="user-icon">
@@ -58,29 +63,35 @@
         <!--Sub menú de usuario-->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>
     <main>
         <div id="perfil-container">
             <div id="prf-imagenes" class="prf-imagenes-container">
-                <img src="imagenes/MenuPrincipalyPerfil/fondoPerfilAuto.jpg" alt="Imagen de Encabezado" class="prf-imagenes-encabezado" id="prf-imagenes-encabezado">
-                <label for="prf-imagenes-fondoPerfilInput" class="prf-imagenes-cambiar prf-imagenes-cambiar-fondo" id="prf-imagenes-cambiar-fondo">
-                    <img src="imagenes/MenuPrincipalyPerfil/logoEditar.png" alt="Cambiar Fondo">
+                <img src="{{ url_for('static', filename='imagenes/MenuPrincipalyPerfil/fondoPerfilAuto.jpg') }}"
+                    alt="Imagen de Encabezado" class="prf-imagenes-encabezado" id="prf-imagenes-encabezado">
+                <label for="prf-imagenes-fondoPerfilInput" class="prf-imagenes-cambiar prf-imagenes-cambiar-fondo"
+                    id="prf-imagenes-cambiar-fondo">
+                    <img src="{{ url_for('static', filename='imagenes/MenuPrincipalyPerfil/logoEditar.png') }}"
+                        alt="Cambiar Fondo">
                 </label>
                 <input type="file" id="prf-imagenes-fondoPerfilInput" class="prf-imagenes-oculto">
                 <div class="prf-imagenes-foto-perfil-wrapper">
-                    <img src="imagenes/MenuPrincipalyPerfil/perfil.jpg" alt="Foto de Perfil" class="prf-imagenes-foto-perfil" id="prf-imagenes-foto-perfil">
-                    <label for="prf-imagenes-perfilInput" class="prf-imagenes-cambiar prf-imagenes-cambiar-perfil" id="prf-imagenes-cambiar-perfil">
-                        <img src="imagenes/MenuPrincipalyPerfil/logoEditar.png" alt="Cambiar Perfil">
+                    <img src="{{ url_for('static', filename='imagenes/MenuPrincipalyPerfil/perfil.jpg') }}"
+                        alt="Foto de Perfil" class="prf-imagenes-foto-perfil" id="prf-imagenes-foto-perfil">
+                    <label for="prf-imagenes-perfilInput" class="prf-imagenes-cambiar prf-imagenes-cambiar-perfil"
+                        id="prf-imagenes-cambiar-perfil">
+                        <img src="{{ url_for('static', filename='imagenes/MenuPrincipalyPerfil/logoEditar.png') }}"
+                            alt="Cambiar Perfil">
                     </label>
                 </div>
                 <input type="file" id="prf-imagenes-perfilInput" class="prf-imagenes-oculto">
             </div>
-                       
+
             <div id="prf-informacion">
                 <div id="info-content">
                     <div id="ic1">
@@ -93,22 +104,27 @@
                     <div id="ic2">
                         <div class="section">
                             <label>Username:</label>
-                            <input type="text" class="form-control txt-custom txt-custom-2" readonly value="LeoMeFlo">
+                            <input id="input-username" type="text" class="form-control txt-custom txt-custom-2" readonly
+                                value="{{ usuario.username }}">
                         </div>
                         <div class="section">
                             <label>Nombre:</label>
-                            <input type="text" class="form-control txt-custom txt-custom-2" readonly value="Leonardo Medina Flores">
+                            <input id="input-nombre" type="text" class="form-control txt-custom txt-custom-2" readonly
+                                value="{{ usuario.nombre }}">
                         </div>
                         <div class="section">
                             <label>Género:</label>
-                            <select id="ic2-sexo" class="form-select btn-search-2" aria-label="Default select example" disabled>
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
+                            <select id="input-genero" class="form-select btn-search-2" disabled>
+                                <option value="masculino" {% if usuario.genero=='masculino' %}selected{% endif %}>
+                                    Masculino</option>
+                                <option value="femenino" {% if usuario.genero=='femenino' %}selected{% endif %}>Femenino
+                                </option>
                             </select>
                         </div>
                         <div class="section">
                             <label>Correo:</label>
-                            <input type="email" class="form-control txt-custom txt-custom-2" readonly value="leomeflo@gmail.com">
+                            <input id="input-correo" type="email" class="form-control txt-custom txt-custom-2" readonly
+                                value="{{ usuario.correo }}">
                         </div>
                         <div class="section">
                             <label>
@@ -117,113 +133,120 @@
                                     <i class="fa-regular fa-eye"></i>
                                 </button>
                             </label>
-                            <input type="password" class="form-control txt-custom txt-custom-2" readonly value="leomeflo09">
+                            <input id="input-password" type="password" class="form-control txt-custom txt-custom-2"
+                                readonly value="{{ usuario.password }}">
                         </div>
                         <div class="section">
                             <label>Teléfono:</label>
-                            <input type="text" class="form-control txt-custom txt-custom-2" readonly value="+51 959 540 598">
+                            <input id="input-telefono" type="text" class="form-control txt-custom txt-custom-2" readonly
+                                value="{{ usuario.telefono }}">
+                        </div>
+
+                        <br>
+
+                        <div id="ic3">
+                            <h3>Medio de Pago</h3>
+                        </div>
+                        <hr>
+                        <div id="ic4">
+                            <div class="section">
+                                <label>Tarjetas Asociadas:</label>
+                                <select class="form-select btn-search-2" aria-label="Default select example" disabled>
+                                    {% if tarjetas %}
+                                    {% for tarjeta in tarjetas %}
+                                    <option value="{{ tarjeta.id_tarjeta }}">{{ tarjeta.numero_tarjeta }}</option>
+                                    {% endfor %}
+                                    {% else %}
+                                    <option disabled selected>No tienes tarjetas registradas</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="ic5">
+                            <h3>Ubicación</h3>
+                        </div>
+                        <hr>
+                        <div id="ic6">
+                            <div class="section">
+                                <label>País:</label>
+                                <select class="form-select btn-search-2" aria-label="Selecciona tu país"
+                                    id="pais-select" name="country" disabled>
+                                    <option value="{{ usuario.pais }}" selected>{{ usuario.pais }}</option>
+                                    <option value="Perú">Perú</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="Brasil">Brasil</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Ecuador">Ecuador</option>
+                                    <option value="México">México</option>
+                                    <option value="Estados Unidos">Estados Unidos</option>
+                                    <option value="Canadá">Canadá</option>
+                                    <option value="España">España</option>
+                                    <option value="Francia">Francia</option>
+                                    <option value="Alemania">Alemania</option>
+                                    <option value="Italia">Italia</option>
+                                    <option value="Reino Unido">Reino Unido</option>
+                                    <option value="Japón">Japón</option>
+                                    <option value="China">China</option>
+                                    <option value="India">India</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Nueva Zelanda">Nueva Zelanda</option>
+                                    <option value="Sudáfrica">Sudáfrica</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="ic7">
+                            <h3>Comentarios</h3>
+                        </div>
+                        <hr>
+                        <div id="ic8">
+                            <div class="section">
+                                <p>Comentarios:</p>
+                                <input type="text" class="form-control txt-custom txt-custom-2" readonly value="...">
+                            </div>
                         </div>
                     </div>
-
-                    <br>
-
-                    <div id="ic3">
-                        <h3>Medio de Pago</h3>
-                    </div>
-                    <hr>
-                    <div id="ic4">
-                        <div class="section">
-                            <label>Tarjertas Asociadas:</label>
-                            <select class="form-select btn-search-2" aria-label="Default select example" disabled>
-                                <option value="5038">5028 0012 3456 7899</option>
-                                <option value="6011">6011 9700 0000 0000</option>
-                                <option value="4111">4111 0203 2608 7104</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div id="ic5">
-                        <h3>Ubicación</h3>
-                    </div>
-                    <hr>
-                    <div id="ic6">
-                        <div class="section">
-                            <label>País:</label>
-                            <select class="form-select btn-search-2" aria-label="Default select example" disabled>
-                                <option value="Perú">Perú</option>
-                                <option value="Argentina">Argentina</option>
-                                <option value="Chile">Chile</option>
-                                <option value="Brasil">Brasil</option>
-                                <option value="Colombia">Colombia</option>
-                                <option value="Ecuador">Ecuador</option>
-                                <option value="México">México</option>
-                                <option value="Estados Unidos">Estados Unidos</option>
-                                <option value="Canadá">Canadá</option>
-                                <option value="España">España</option>
-                                <option value="Francia">Francia</option>
-                                <option value="Alemania">Alemania</option>
-                                <option value="Italia">Italia</option>
-                                <option value="Reino Unido">Reino Unido</option>
-                                <option value="Japón">Japón</option>
-                                <option value="China">China</option>
-                                <option value="India">India</option>
-                                <option value="Australia">Australia</option>
-                                <option value="Nueva Zelanda">Nueva Zelanda</option>
-                                <option value="Sudáfrica">Sudáfrica</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div id="ic7">
-                        <h3>Comentarios</h3>
-                    </div>
-                    <hr>
-                    <div id="ic8">
-                        <div class="section">
-                            <p>Comentarios:</p>
-                            <input type="text" class="form-control txt-custom txt-custom-2" readonly value="...">
-                        </div>
-                    </div>
-                </div>
-                <div id="info-options">
-                    <button class="btn-search-2 btn-search-3">
-                        <i class="fa-solid fa-piggy-bank"></i>
-                        <h5>Total Ahorrado</h5>
-                        <p>S/. 120.00</p>
-                    </button>
-                    <a href="historial-compras.html">
+                    <div id="info-options">
                         <button class="btn-search-2 btn-search-3">
-                            <i class="fa-regular fa-clock"></i>
-                            <br>
-                            <h5>Historial de Pagos</h5>
+                            <i class="fa-solid fa-piggy-bank"></i>
+                            <h5>Total Ahorrado</h5>
+                            <p>S/. 120.00</p>
                         </button>
-                    </a>
-                    <a href="lista-deseos.html">
-                        <button class="btn-search-2 btn-search-3">
-                            <i class="fa-solid fa-star"></i>
-                            <br>
-                            <h5>Favoritos</h5>
-                        </button>
-                    </a>
-                    <a href="ruleta-game.html">
-                        <button class="btn-search-2 btn-search-3">
-                            <!--Lo mas cercano a una ruleta, no hay presupuesto para el pro del font-->
-                            <i class="fa-solid fa-dice-d20"></i>
-                            <br>
-                            <h5>Ruleta</h5>
-                        </button>
-                    </a>
+                        <a href="{{ url_for('historial_compras') }}">
+                            <button class="btn-search-2 btn-search-3">
+                                <i class="fa-regular fa-clock"></i>
+                                <br>
+                                <h5>Historial de Pagos</h5>
+                            </button>
+                        </a>
+                        <a href="{{ url_for('lista_deseos') }}">
+                            <button class="btn-search-2 btn-search-3">
+                                <i class="fa-solid fa-star"></i>
+                                <br>
+                                <h5>Favoritos</h5>
+                            </button>
+                        </a>
+                        <a href="{{ url_for('ruleta_game') }}">
+                            <button class="btn-search-2 btn-search-3">
+                                <i class="fa-solid fa-dice-d20"></i>
+                                <br>
+                                <h5>Ruleta</h5>
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
     </main>
     <footer>
         <div id="main-end">
-            &nbsp;
+             
         </div>
         <div id="copyright">
             <p>
@@ -248,8 +271,9 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/editarPerfil.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/editarPerfil.js') }}"></script>
 </body>
+
 </html>

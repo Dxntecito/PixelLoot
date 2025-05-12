@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Juego</title>
+</head>
+<body>
+    <h1>Agregar Juego</h1>
+    <form action="/agregar_juego" method="post" enctype="multipart/form-data">
+        <label>Nombre del juego:</label>
+        <input type="text" name="nombre" required><br>
+
+        <label>Precio:</label>
+        <input type="number" step="0.01" name="precio" required><br>
+
+        <label>Imagen principal:</label>
+        <input type="file" name="imagen" required><br>
+
+        <label>Imagen extra 1:</label>
+        <input type="file" name="imagene1"><br>
+
+        <label>Imagen extra 2:</label>
+        <input type="file" name="imagene2"><br>
+
+        <label>Imagen extra 3:</label>
+        <input type="file" name="imagene3"><br>
+
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" required><br>
+
+        <label>Descripción:</label>
+        <textarea name="descripcion" required></textarea><br>
+
+        <button type="submit">Agregar</button>
+    </form>
+</body>
+</html>

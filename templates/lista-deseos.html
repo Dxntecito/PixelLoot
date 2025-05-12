@@ -7,9 +7,9 @@
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +19,8 @@
     <header>
         <!--Div del logo-->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
         
@@ -39,10 +39,10 @@
         <!--Nav general de página-->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
         
@@ -58,9 +58,9 @@
         <!--Sub menú de usuario-->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>
@@ -70,71 +70,57 @@
             <br>
             <div id="listita">
                 <div id="varbus">
-                    <button id="btn-varbus" class="btn btn-search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        &nbsp; Buscar
-                    </button>
+                    <form action="{{ url_for('lista_deseos') }}" method="GET">
+                        <button id="btn-varbus" class="btn btn-search" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Buscar
+                        </button>
+                        <input type="text" name="search" class="form-control d-inline-block w-auto" placeholder="Buscar juego" value="{{ search }}">
+                    </form>
                     <div id="select-varbus">
-                        <select class="form-select btn-search" aria-label="Default select example">
-                            <option hidden>Ordenar por --</option>
-                            <option value="1" class="text-dark">Precios Ascendente</option>
-                            <option value="2" class="text-dark">Precios Descendente</option>
-                            <option value="3" class="text-dark">Nombre A-Z</option>
-                            <option value="4" class="text-dark">Nombre Z-A</option>
-                        </select>
+                        <form action="{{ url_for('lista_deseos') }}" method="GET">
+                            <select name="sort" class="form-select btn-search" aria-label="Ordenar lista de deseos" onchange="this.form.submit()">
+                                <option hidden>Ordenar por --</option>
+                                <option value="1" {% if sort == '1' %}selected{% endif %} class="text-dark">Precios Ascendente</option>
+                                <option value="2" {% if sort == '2' %}selected{% endif %} class="text-dark">Precios Descendente</option>
+                                <option value="3" {% if sort == '3' %}selected{% endif %} class="text-dark">Nombre A-Z</option>
+                                <option value="4" {% if sort == '4' %}selected{% endif %} class="text-dark">Nombre Z-A</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
                 <div id="juegitos-lista">
-                    <div class="elemntos-lista">
-                        <img class="elm-img" src="imagenes/3.jpg" alt="days-gone">
-                        <div class="elm-txt">
-                            <ul style="list-style: none;">
-                                <li><h5>Days Gone</h5></li>
-                                <li>S/. 159.20</li>
-                            </ul>
-                            <div class="elm-btn">
-                                <button onclick="agregarAlCarrito('Days Gone', 159.20, 'imagenes/3.jpg')" class="btn btn-custom" style="max-width: 250px;">
-                                    Añadir al Carrito
-                                    &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                                </button>
-                                <button type="button" class="btn-close" aria-label="Close"></button>
+                    {% if wishlist %}
+                        {% for item in wishlist %}
+                        <div class="elemntos-lista">
+                            <img class="elm-img" src="{{ url_for('static', filename=item.imagen) }}" alt="{{ item.nombre }}">
+                            <div class="elm-txt">
+                                <ul style="list-style: none;">
+                                    <li><h5>{{ item.nombre }}</h5></li>
+                                    <li>S/. {{ item.precio }}</li>
+                                </ul>
+                                <div class="elm-btn">
+                                    <form action="{{ url_for('lista_deseos') }}" method="POST">
+                                        <input type="hidden" name="action" value="add_to_cart">
+                                        <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                                        <button type="submit" class="btn btn-custom" style="max-width: 250px;">
+                                            Añadir al Carrito
+                                            <i class="fa-solid fa-cart-plus"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ url_for('lista_deseos') }}" method="POST">
+                                        <input type="hidden" name="action" value="remove">
+                                        <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                                        <button type="submit" class="btn-close" aria-label="Eliminar de la lista de deseos"></button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="elemntos-lista">
-                        <img class="elm-img" src="imagenes/8.jpg" alt="days-gone">
-                        <div class="elm-txt">
-                            <ul style="list-style: none;">
-                                <li><h5>Sekiro</h5></li>
-                                <li>S/. 217.50</li>
-                            </ul>
-                            <div class="elm-btn">
-                                <button onclick="agregarAlCarrito('Sekiro', 217.50, 'imagenes/8.jpg')" class="btn btn-custom" style="max-width: 250px;">
-                                    Añadir al Carrito
-                                    &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                                </button>
-                                <button type="button" class="btn-close" aria-label="Close"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="elemntos-lista">
-                        <img class="elm-img" src="imagenes/5.jpg" alt="days-gone">
-                        <div class="elm-txt">
-                            <ul style="list-style: none;">
-                                <li><h5>Resident Evil 2</h5></li>
-                                <li>S/. 149.60</li>
-                            </ul>
-                            <div class="elm-btn">
-                                <button onclick="agregarAlCarrito('Resident Evil 2', 149.60, 'imagenes/5.jpg')" class="btn btn-custom" style="max-width: 250px;">
-                                    Añadir al Carrito
-                                    &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                                </button>
-                                <button type="button" class="btn-close" aria-label="Close"></button>
-                            </div>
-                        </div>
-                    </div>
+                        <br>
+                        {% endfor %}
+                    {% else %}
+                        <p>No hay juegos en tu lista de deseos.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -166,7 +152,7 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

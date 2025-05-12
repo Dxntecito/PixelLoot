@@ -4,63 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PixelLoot | Contáctanos</title>
-    <!--Font Awesome-->
+    <!-- SEO -->
+    <meta name="description" content="Contáctanos en PixelLoot para cualquier pregunta, comentario o asistencia.">
+    <meta name="keywords" content="PixelLoot, contacto, soporte, videojuegos, redes sociales">
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
-    <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
-    <!--Tipografía Ubuntu-->
+    <!-- Vincular CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
+    <!-- Tipografía Ubuntu -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <!--Div del logo-->
+        <!-- Div del logo -->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
         
-        <!--Botón de menú hamburguesa-->
+        <!-- Botón de menú hamburguesa -->
         <div id="menu-hamburguesa">
-            <button id="toggle">
+            <button id="toggle" aria-label="Abrir menú">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
-        <!--Menú desplegable-->
+        <!-- Menú desplegable -->
         <div id="responsive-menu">
             <!-- contenido del menú responsive -->
         </div>
 
-        <!--Nav general de página-->
+        <!-- Nav general de página -->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
         
-        <!--Perfil del usuario-->
+        <!-- Perfil del usuario -->
         <div id="caja3">
-            <a href="#" id="user-icon">
+            <a href="#" id="user-icon" aria-label="Abrir menú de usuario">
                 <i class="fa-solid fa-user"></i>
             </a>
         </div>
         <div id="overlay"></div>
         <div id="circular-animation"></div>
         <div id="circular-animation-message">Ingresa a tu carrito</div>
-        <!--Sub menú de usuario-->
+        <!-- Sub menú de usuario -->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>
@@ -71,31 +74,39 @@
             <p>
                 Valoramos la comunicación abierta y directa con nuestros clientes. Si tienes alguna pregunta, comentario o necesitas asistencia, no dudes en ponerte en contacto con nosotros.
             </p>
+            <!-- Mostrar mensajes flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <div id="ctos-contact">
-                <form id="ctos-form-contact">
-                    <input type="email" class="form-control txt-custom" id="exampleFormControlInput1" placeholder="Correo Electrónico--" required>
+                <form id="ctos-form-contact" action="{{ url_for('contactanos') }}" method="POST">
+                    <input type="email" name="email" class="form-control txt-custom" id="email" placeholder="Correo Electrónico" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     <br>
-                    <textarea class="form-control txt-area-custom" id="exampleFormControlTextarea1" placeholder="Mensaje--" rows="10" required></textarea>
+                    <textarea name="mensaje" class="form-control txt-area-custom" id="mensaje" placeholder="Mensaje" rows="10" required></textarea>
                     <br>
-                    <button class="btn btn-custom">Enviar Mensaje</button>
+                    <button type="submit" class="btn btn-custom" aria-label="Enviar mensaje">Enviar Mensaje</button>
                 </form>
                 <div id="ctos-social-medias">
                     <h5>O encuéntranos en nuestras redes sociales</h5>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="#" aria-label="Facebook de PixelLoot">
                                 <i class="fa-brands fa-facebook"></i>
                                 PixelLoot
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" aria-label="Instagram de PixelLoot">
                                 <i class="fa-brands fa-instagram"></i>
                                 @pixel_loot
                             </a>
                         </li>
                         <li>
-                            <a href="https://wa.me/962756933">
+                            <a href="https://wa.me/962756933" aria-label="WhatsApp de PixelLoot">
                                 <i class="fa-brands fa-whatsapp"></i>
                                 +51 962756933
                             </a>
@@ -106,13 +117,9 @@
         </div>
     </main>
     <footer>
-        <div id="main-end">
-            &nbsp;
-        </div>
+        <div id="main-end"></div>
         <div id="copyright">
-            <p>
-                Copyright © 2024 PixelLoot - All rights reserved
-            </p>
+            <p>Copyright © 2024 PixelLoot - All rights reserved</p>
         </div>
         <div id="setting">
             <div id="country" class="sub-setting">
@@ -132,7 +139,7 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

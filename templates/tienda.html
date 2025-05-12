@@ -7,9 +7,9 @@
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +19,8 @@
     <header>
         <!--Div del logo-->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
         
@@ -39,10 +39,10 @@
         <!--Nav general de página-->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
         
@@ -58,9 +58,9 @@
         <!--Sub menú de usuario-->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>  
@@ -72,48 +72,64 @@
                 <div class="tnd-barra-busqueda">
                     <button class="btn btn-search">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        &nbsp; Buscar
+                        Buscar
                     </button>
                     <!-- <div class="filtros-precios">
-                        &nbsp; Filtrar entre: S/. &nbsp;
+                        Filtrar entre: S/.  
                         <input class="btn btn-search btn-search-2" placeholder="--">
-                        &nbsp; y &nbsp;
+                        y  
                         <input class="btn btn-search btn-search-2" placeholder="--">
                     </div> -->
                 </div>
                 <div class="tnd-contenido">
+                    
                     <div id="juegos-contenedor">
-                        <!--Contenido de tarjetas de juegos autogeneradas-->
+                        {% for producto in juegos %}
+                        <div class="tarjeta-producto">
+                            <!-- Usar la ruta de la imagen directamente desde la base de datos -->
+                            <img src="{{ url_for('static', filename=producto[4].replace('static/', '').replace('\\', '/')) }}" alt="{{ producto[0] }}">
+                            
+                            <!-- Enlace dinámico al detalle del producto -->
+                            <h3>
+                                <a href="{{ url_for('detalle_juego', id_juego=producto[0]) }}">
+                                    {{ producto[1] }}
+                                </a>
+                            </h3>
+                    
+                            <p class="precio">S/{{ producto[2] }}</p>
+                        </div>
+                        {% endfor %}
                     </div>
+                    
                 </div>
                 <div class="tnd-filtros">
                     <nav class="categorias">     
                         <div>
                             <div class="categoria-item">
-                               <input type="checkbox" class="btn" name="categoria" value="Accion">
-                                <label><a href="Accion.html">Acción</a></label>
+                                <input type="checkbox" class="btn" name="categoria" value="Accion">
+                                <label>Acción</label> <!-- Ruta no definida en main.py -->
                             </div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Aventura">
-                                <label><a href="Aventura.html">Aventura</a></label>
+                                <label>Aventura</label> <!-- Ruta no definida en main.py -->
                             </div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Retro">
-                                <label><a href="Retro.html">Retro</a></label>
+                                <label>Retro</label> <!-- Ruta no definida en main.py -->
                             </div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Terror">
-                                <label><a href="Terror.html">Terror</a></label>
+                                <label>Terror</label> <!-- Ruta no definida en main.py -->
                             </div>
                         </div>
                         <div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Rol">
-                                <label><a href="Rol.html">Rol</a></label>
+                                <label>Rol</label> <!-- Ruta no definida en main.py -->
                             </div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Sandbox">
-                                <label><a href="Sandbox.html">Sandbox</a></label>
+                                <label>Sandbox</label> <!-- Ruta no definida en main.py -->
                             </div>
                         </div>
                     </nav>
@@ -123,7 +139,7 @@
     </main>
     <footer>
         <div id="main-end">
-            &nbsp;
+             
         </div>
         <div id="copyright">
             <p>
@@ -148,8 +164,8 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/juegos.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/juegos.js') }}"></script>
 </body>
 </html>
