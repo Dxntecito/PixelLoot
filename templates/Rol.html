@@ -3,189 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelLoot | Aventura</title>
-    <!--Font Awesome-->
+    <title>PixelLoot | Rol</title>
+    <!-- SEO -->
+    <meta name="description" content="Explora los mejores juegos de aventura en PixelLoot, con historias épicas y mundos inmersivos.">
+    <meta name="keywords" content="juegos, aventura, PixelLoot, Dark Souls, Sekiro, Days Gone, God of War">
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
-    <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
-    <!--Tipografía Ubuntu-->
+    <!-- Vincular CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
+    <!-- Tipografía Ubuntu -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <!--Div del logo-->
+        <!-- Div del logo -->
         <div id="caja1">
-            <a href="index.html">
-                <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
         
-        <!--Botón de menú hamburguesa-->
+        <!-- Botón de menú hamburguesa -->
         <div id="menu-hamburguesa">
-            <button id="toggle">
+            <button id="toggle" aria-label="Abrir menú">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
-        <!--Menú desplegable-->
+        <!-- Menú desplegable -->
         <div id="responsive-menu">
             <!-- contenido del menú responsive -->
         </div>
 
-        <!--Nav general de página-->
+        <!-- Nav general de página -->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-                <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-                <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
         
-        <!--Perfil del usuario-->
+        <!-- Perfil del usuario -->
         <div id="caja3">
-            <a href="#" id="user-icon">
+            <a href="#" id="user-icon" aria-label="Abrir menú de usuario">
                 <i class="fa-solid fa-user"></i>
             </a>
         </div>
         <div id="overlay"></div>
         <div id="circular-animation"></div>
         <div id="circular-animation-message">Ingresa a tu carrito</div>
-        <!--Sub menú de usuario-->
+        <!-- Sub menú de usuario -->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
     </header>
     <main>
-        <div id="accion-container">
+        <div id="aventura-container">
             <h1>Aventura</h1>
             <br>
             <div class="tnd-productos">
                 <div class="tnd-barra-busqueda">
-                    <button class="btn btn-search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        &nbsp; Buscar
-                    </button>
-                    <!-- <div class="filtros-precios">
-                        &nbsp; Filtrar entre: S/. &nbsp;
-                        <input class="btn btn-search btn-search-2" placeholder="--">
-                        &nbsp; y &nbsp;
-                        <input class="btn btn-search btn-search-2" placeholder="--">
-                    </div> -->
+                    <form action="{{ url_for('categoria_aventura') }}" method="GET">
+                        <button type="submit" class="btn btn-search" aria-label="Buscar juegos">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Buscar
+                        </button>
+                        <input type="text" name="q" placeholder="Buscar juegos..." class="form-control">
+                    </form>
                 </div>
                 <div class="tnd-contenido">
                     <div class="ctg-conte">
                         <div class="conte-1">
+                            {% if productos %}
                             <div class="prd-contenedor">
                                 <div class="prd-1">
                                     <h3>Más Recomendado</h3>
                                     <div class="prd-juego-principal">
-                                        <img src="imagenes/2.jpg" alt="Imagen de Borderlands 3">
-                                        <h5><a href="prd-darksouls.html">Dark Souls</a></h5>
+                                        <img src="{{ url_for('static', filename=productos[0].imagen) }}" alt="{{ productos[0].nombre }}">
+                                        <h5><a href="{{ url_for('producto', id=productos[0].id) }}">{{ productos[0].nombre }}</a></h5>
                                     </div>
                                 </div>
                                 <div class="prd-2">
                                     <button class="tem_juego tem_juego_3">
-                                        <b>S/.115.00</b>
+                                        <b>S/. {{ productos[0].precio }}</b>
                                     </button>
-                                    <button class="tem_juego tem_juego_2">
-                                        Añadir al Carrito
-                                        &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                                    </button>
+                                    <form action="{{ url_for('producto', id=productos[0].id) }}" method="POST">
+                                        <input type="hidden" name="action" value="add_to_cart">
+                                        <button type="submit" class="tem_juego tem_juego_2" aria-label="Añadir {{ productos[0].nombre }} al carrito">
+                                            Añadir al Carrito
+                                            <i class="fa-solid fa-cart-plus"></i>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div class="prd-descripcion prd-3">
-                                    <p>"Dark Souls" es un videojuego de rol de acción desarrollado por FromSoftware y dirigido por Hidetaka Miyazaki. Lanzado en 2011, "Dark Souls" es conocido por su dificultad implacable y su rica narrativa ambiental. La historia se desarrolla en el oscuro y peligroso mundo de Lordran, donde los jugadores asumen el papel de un no muerto elegido con la tarea de descubrir el destino de los no muertos y enfrentar enemigos formidables en su viaje.
-                                    </p>
+                                    <p>{{ productos[0].descripcion }}</p>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                         <div class="conte-2">
+                            {% for producto in productos[1:] %}
                             <div class="elemntos-lista-2">
-                                <img class="elm-img-2" src="imagenes/8.jpg" alt="days-gone">
+                                <img class="elm-img-2" src="{{ url_for('static', filename=producto.imagen) }}" alt="{{ producto.nombre }}">
                                 <div class="elm-txt-2">
-                                    <h5><a href="prd-residentevil2.html">Sekiro</a></h5>
-                                    <p>
-                                        En Sekiro™: Shadows Die Twice encarnas al 'lobo manco', un guerrero desfigurado y caído en desgracia que ha sido rescatado al borde de la muerte. Tras jurar proteger a un joven señor descendiente de un antiguo linaje, te conviertes en el objetivo de despiadados enemigos, entre ellos el peligroso clan Ashina.                                    </p>
+                                    <h5><a href="{{ url_for('producto', id=producto.id) }}">{{ producto.nombre }}</a></h5>
+                                    <p>{{ producto.descripcion | truncate(200) }}</p>
                                     <div>
-                                        <b>S/. 217.50</b>
-                                        <button class="tem_juego tem_juego_2">
-                                            Añadir al Carrito
-                                            &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                                        </button>
+                                        <b>S/. {{ producto.precio }}</b>
+                                        <form action="{{ url_for('producto', id=producto.id) }}" method="POST">
+                                            <input type="hidden" name="action" value="add_to_cart">
+                                            <button type="submit" class="tem_juego tem_juego_2" aria-label="Añadir {{ producto.nombre }} al carrito">
+                                                Añadir al Carrito
+                                                <i class="fa-solid fa-cart-plus"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="elemntos-lista-2">
-                                <img class="elm-img-2" src="imagenes/3.jpg" alt="days-gone">
-                                <div class="elm-txt-2">
-                                    <h5><a href="prd-daysgone.html">Days Gone</a></h5>
-                                    <p>
-                                        Ponte en los zapatos salpicados de barro del otrora forajido Deacon St. John, un motero cazarrecompensas que intenta buscar una razón por la que vivir en una tierra rodeada de muerte. Registra asentamientos abandonados en busca de equipamiento para crear armas y objetos valiosos o arriésgate a tratar con otros supervivientes que se ganan la vida a duras penas mediante intercambios justos... u otros métodos más violentos.
-                                    </p>
-                                    <div>
-                                        <b>S/. 159.20</b>
-                                        <button class="tem_juego tem_juego_2">
-                                            Añadir al Carrito
-                                            &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="elemntos-lista-2">
-                                <img class="elm-img-2" src="imagenes/1.jpg" alt="days-gone">
-                                <div class="elm-txt-2">
-                                    <h5><a href="prd-god.html">God of War</a></h5>
-                                    <p>
-                                        Kratos ha dejado atrás su venganza contra los dioses del Olimpo y vive ahora como un hombre en los dominios de los dioses y monstruos nórdicos. En este mundo cruel e implacable debe luchar para sobrevivir… y enseñar a su hijo a hacerlo también.
-                                    </p>
-                                    <div>
-                                        <b>S/. 159.00</b>
-                                        <button class="tem_juego tem_juego_2">
-                                            Añadir al Carrito
-                                            &nbsp; <i class="fa-solid fa-cart-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
                 <div class="tnd-filtros">
-                    <nav class="categorias">     
+                    <nav class="categorias">
                         <div>
                             <div class="categoria-item">
-                               <input type="checkbox" class="btn" name="categoria" value="Accion">
-                                <label><a href="Accion.html">Acción</a></label>
+                                <input type="checkbox" class="btn" name="categoria" value="Accion">
+                                <label><a href="{{ url_for('categoria_accion') }}">Acción</a></label>
                             </div>
                             <div class="categoria-item">
-                                <input type="checkbox" class="btn" name="categoria" value="Aventura">
-                                <label><a href="Aventura.html">Aventura</a></label>
+                                <input type="checkbox" class="btn" name="categoria" value="Aventura" checked>
+                                <label><a href="{{ url_for('categoria_aventura') }}">Aventura</a></label>
                             </div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Retro">
-                                <label><a href="Retro.html">Retro</a></label>
+                                <label><a href="{{ url_for('categoria_retro') }}">Retro</a></label>
                             </div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Terror">
-                                <label><a href="Terror.html">Terror</a></label>
+                                <label><a href="{{ url_for('categoria_terror') }}">Terror</a></label>
                             </div>
                         </div>
                         <div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Rol">
-                                <label><a href="Rol.html">Rol</a></label>
+                                <label><a href="{{ url_for('categoria_rol') }}">Rol</a></label>
                             </div>
                             <div class="categoria-item">
                                 <input type="checkbox" class="btn" name="categoria" value="Sandbox">
-                                <label><a href="Sandbox.html">Sandbox</a></label>
+                                <label><a href="{{ url_for('categoria_sandbox') }}">Sandbox</a></label>
                             </div>
                         </div>
                     </nav>
@@ -194,13 +170,9 @@
         </div>
     </main>
     <footer>
-        <div id="main-end">
-            &nbsp;
-        </div>
+        <div id="main-end"></div>
         <div id="copyright">
-            <p>
-                Copyright © 2024 PixelLoot - All rights reserved
-            </p>
+            <p>Copyright © 2024 PixelLoot - All rights reserved</p>
         </div>
         <div id="setting">
             <div id="country" class="sub-setting">
@@ -220,8 +192,8 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/juegos.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/juegos.js') }}"></script>
 </body>
 </html>

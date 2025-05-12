@@ -7,197 +7,197 @@
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <!--Div del logo-->
-    <div id="caja1">
-        <a href="index.html">
-            <img src="imagenes/logo_pxl.jpg" alt="pixel_loot" id="logo-pixel-header">
-        </a>
-    </div>
-    
-    <!--Botón de menú hamburguesa-->
-    <div id="menu-hamburguesa">
-        <button id="toggle">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-    </div>
+    <header>
+        <!--Div del logo-->
+        <div id="caja1">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
+            </a>
+        </div>
+        
+        <!--Botón de menú hamburguesa-->
+        <div id="menu-hamburguesa">
+            <button id="toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
 
-    <!--Menú desplegable-->
-    <div id="responsive-menu">
-        <!-- contenido del menú responsive -->
-    </div>
+        <!--Menú desplegable-->
+        <div id="responsive-menu">
+            <!-- contenido del menú responsive -->
+        </div>
 
-    <!--Nav general de página-->
-    <nav id="caja2">
-      <ul id="nav-menu">
-        <li><a href="index.html" class="nav-menu-links">Novedades</a></li>
-        <li><a href="tienda.html" class="nav-menu-links">Tienda</a></li>
-        <li><a href="sobre-nosotros.html" class="nav-menu-links">Sobre Nosotros</a></li>
-        <li><a href="soporte.html" class="nav-menu-links">Soporte</a></li>
-    </ul>
-    </nav>
-    
-    <!--Perfil del usuario-->
-    <div id="caja3">
-        <a href="#" id="user-icon">
-            <i class="fa-solid fa-user"></i>
-        </a>
-    </div>
-    <div id="overlay"></div>
-    <div id="circular-animation"></div>
-    <div id="circular-animation-message">Ingresa a tu carrito</div>
-    <!--Sub menú de usuario-->
-    <div id="user">
-      <ul id="user-menu">
-        <li><a href="perfil.html" class="user-menu-links">Mi Perfil</a></li>
-        <li><a href="carrito.html" class="user-menu-links">Mi Carrito</a></li>
-        <li><a href="iniciar-sesion.html" class="user-menu-links">Cerrar Sesión</a></li>
-    </ul>
-    </div>
-</header>
+        <!--Nav general de página-->
+        <nav id="caja2">
+            <ul id="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
+                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
+                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
+                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
+            </ul>
+        </nav>
+        
+        <!--Perfil del usuario-->
+        <div id="caja3">
+            <a href="#" id="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+        <div id="overlay"></div>
+        <div id="circular-animation"></div>
+        <div id="circular-animation-message">Ingresa a tu carrito</div>
+        <!--Sub menú de usuario-->
+        <div id="user">
+            <ul id="user-menu">
+                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
+                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
+                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </header>
     <main>
         <div id="soporte-container">
             <h1>Soporte</h1>
             <br>
             <div class="container">
                 <div class="row">
-                  <div class="col">
-                    <h3 class="tlt-accordion mb-2">Pedidos y Productos</h3>
-                    <div class="accordion" id="accordionPedidos">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOnePedidos" aria-expanded="false" aria-controls="collapseOnePedidos">
-                            <h5>¿Cómo recibo la llave de mi videojuego?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseOnePedidos" class="accordion-collapse collapse" data-bs-parent="#accordionPedidos">
-                          <div class="accordion-body custom-accordion-body">
-                            Después de completar tu compra, la llave del videojuego se enviará automáticamente a tu correo electrónico registrado. Asegúrate de revisar tu carpeta de spam si no ves el correo en tu bandeja de entrada.
-                          </div>
+                    <div class="col">
+                        <h3 class="tlt-accordion mb-2">Pedidos y Productos</h3>
+                        <div class="accordion" id="accordionPedidos">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOnePedidos" aria-expanded="false" aria-controls="collapseOnePedidos">
+                                        <h5>¿Cómo recibo la llave de mi videojuego?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseOnePedidos" class="accordion-collapse collapse" data-bs-parent="#accordionPedidos">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Después de completar tu compra, la llave del videojuego se enviará automáticamente a tu correo electrónico registrado. Asegúrate de revisar tu carpeta de spam si no ves el correo en tu bandeja de entrada.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoPedidos" aria-expanded="false" aria-controls="collapseTwoPedidos">
+                                        <h5>¿Qué hago si no recibo mi llave?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwoPedidos" class="accordion-collapse collapse" data-bs-parent="#accordionPedidos">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Si no has recibido la llave de tu videojuego dentro de unos minutos después de la compra, verifica tu carpeta de spam. Si aún no la encuentras, contacta a nuestro equipo de soporte para asistencia.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreePedidos" aria-expanded="false" aria-controls="collapseThreePedidos">
+                                        <h5>¿Puedo solicitar un reembolso?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseThreePedidos" class="accordion-collapse collapse" data-bs-parent="#accordionPedidos">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Las políticas de reembolso varían según el proveedor del videojuego. Contacta a nuestro equipo de soporte con los detalles de tu compra para evaluar si tu pedido es elegible para un reembolso.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoPedidos" aria-expanded="false" aria-controls="collapseTwoPedidos">
-                            <h5>¿Qué hago si no recibo mi llave?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseTwoPedidos" class="accordion-collapse collapse" data-bs-parent="#accordionPedidos">
-                          <div class="accordion-body custom-accordion-body">
-                            Si no has recibido la llave de tu videojuego dentro de unos minutos después de la compra, verifica tu carpeta de spam. Si aún no la encuentras, contacta a nuestro equipo de soporte para asistencia.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreePedidos" aria-expanded="false" aria-controls="collapseThreePedidos">
-                            <h5>¿Puedo solicitar un reembolso?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseThreePedidos" class="accordion-collapse collapse" data-bs-parent="#accordionPedidos">
-                          <div class="accordion-body custom-accordion-body">
-                            Las politicas de reembolso varian según el proveedor del videojuego. Contacta a nuestro equipo de soporte con los detalles de tu compra para evaluar si tu pedido es elegible para un reembolso.
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <br>
-              <div class="container">
+            </div>
+            <br>
+            <div class="container">
                 <div class="row">
-                  <div class="col">
-                    <h3 class="tlt-accordion mb-2">Cuenta y Seguridad</h3>
-                    <div class="accordion" id="accordionCuenta">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneCuenta" aria-expanded="false" aria-controls="collapseOneCuenta">
-                            <h5>¿Cómo puedo reestablecer mi contraseña?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseOneCuenta" class="accordion-collapse collapse" data-bs-parent="#accordionCuenta">
-                          <div class="accordion-body custom-accordion-body">
-                            Para restablecer tu contraseña, configúrala desde tu perfil de usuario y sigue las instrucciones brindadas en tu correo electrónico para reestablecerla.
-                          </div>
+                    <div class="col">
+                        <h3 class="tlt-accordion mb-2">Cuenta y Seguridad</h3>
+                        <div class="accordion" id="accordionCuenta">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneCuenta" aria-expanded="false" aria-controls="collapseOneCuenta">
+                                        <h5>¿Cómo puedo reestablecer mi contraseña?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseOneCuenta" class="accordion-collapse collapse" data-bs-parent="#accordionCuenta">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Para restablecer tu contraseña, configúrala desde tu perfil de usuario y sigue las instrucciones brindadas en tu correo electrónico para reestablecerla.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoCuenta" aria-expanded="false" aria-controls="collapseTwoCuenta">
+                                        <h5>¿Cómo puedo actualizar mi información?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwoCuenta" class="accordion-collapse collapse" data-bs-parent="#accordionCuenta">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Puedes actualizar tu información personal, de contacto y métodos de pago desde tu perfil de usuario, accesible desde el menú principal.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoCuenta" aria-expanded="false" aria-controls="collapseTwoCuenta">
-                            <h5>¿Cómo puedo actualizar mi información?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseTwoCuenta" class="accordion-collapse collapse" data-bs-parent="#accordionCuenta">
-                          <div class="accordion-body custom-accordion-body">
-                            Puedes actualizar tu información personal, de contacto y métodos de pago desde tu perfil de usuario, accesible desde el menú principal.
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <br>
-              <div class="container">
+            </div>
+            <br>
+            <div class="container">
                 <div class="row">
-                  <div class="col">
-                    <h3 class="tlt-accordion mb-2">Soporte Técnico</h3>
-                    <div class="accordion" id="accordionSoporte">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneSoporte" aria-expanded="false" aria-controls="collapseOneSoporte">
-                            <h5>¿Qué hago si tengo problemas al iniciar sesión?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseOneSoporte" class="accordion-collapse collapse" data-bs-parent="#accordionSoporte">
-                          <div class="accordion-body custom-accordion-body">
-                            Si tienes problemas para iniciar sesión, intenta restablecer tu contraseña. Si el problema persiste, contáctanos mediante el formulario de contacto.
-                          </div>
+                    <div class="col">
+                        <h3 class="tlt-accordion mb-2">Soporte Técnico</h3>
+                        <div class="accordion" id="accordionFalta">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneSoporte" aria-expanded="false" aria-controls="collapseOneSoporte">
+                                        <h5>¿Qué hago si tengo problemas al iniciar sesión?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseOneSoporte" class="accordion-collapse collapse" data-bs-parent="#accordionFalta">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Si tienes problemas para iniciar sesión, intenta restablecer tu contraseña. Si el problema persiste, contáctanos mediante el formulario de contacto.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoSoporte" aria-expanded="false" aria-controls="collapseTwoSoporte">
+                                        <h5>¿Qué hago si mi llave no funciona?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwoSoporte" class="accordion-collapse collapse" data-bs-parent="#accordionFalta">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Si tu llave de videojuego no funciona, verifica que la hayas ingresado correctamente y que esté destinada a la plataforma correcta. Si el problema persiste, contáctanos, proporcionando detalles de la llave y cualquier mensaje de error que recibas.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeSoporte" aria-expanded="false" aria-controls="collapseThreeSoporte">
+                                        <h5>¿Cómo puedo solucionar problemas de compatibilidad?</h5>
+                                    </button>
+                                </h2>
+                                <div id="collapseThreeSoporte" class="accordion-collapse collapse" data-bs-parent="#accordionFalta">
+                                    <div class="accordion-body custom-accordion-body">
+                                        Si experimentas problemas de compatibilidad, revisa los requisitos del sistema del juego y compáralos con las especificaciones de tu computadora.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoSoporte" aria-expanded="false" aria-controls="collapseTwoSoporte">
-                            <h5>¿Qué hago si mi llave no funciona?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseTwoSoporte" class="accordion-collapse collapse" data-bs-parent="#accordionSoporte">
-                          <div class="accordion-body custom-accordion-body">
-                            Si tu llave de videojuego no funciona, verifica que la hayas ingresado correctamente y que esté destinada a la plataforma correcta. Si el problema persiste, contáctanos, proporcionando detalles de la llave y cualquier mensaje de error que recibas.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeSoporte" aria-expanded="false" aria-controls="collapseThreeSoporte">
-                            <h5>¿Cómo puedo solucionar problemas de compatibilidad?</h5>
-                          </button>
-                        </h2>
-                        <div id="collapseThreeSoporte" class="accordion-collapse collapse" data-bs-parent="#accordionSoporte">
-                          <div class="accordion-body custom-accordion-body">
-                            Si experimentas problemas de compatibilidad, revisa los requisitos del sistema del juego y compáralos con las especificaciones de tu computadora.
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
         </div>
     </main>
     <footer>
         <div id="main-end">
-            &nbsp;
+             
         </div>
         <div id="copyright">
             <p>
@@ -222,7 +222,7 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

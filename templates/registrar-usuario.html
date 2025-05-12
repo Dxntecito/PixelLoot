@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Usuario</title>
+    <title>PixelLoot | Crea una Cuenta</title>
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!--Vincular Css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilos1.css">
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,15 +21,21 @@
             <div class="form-container form-container-2">
                 <h1>Crea una Cuenta</h1>
                 <br>
-                <form>
+                {% if error %}
+                <p class="text-danger">{{ error }}</p>
+                {% endif %}
+                {% if success %}
+                <p class="text-success">{{ success }}</p>
+                {% endif %}
+                <form method="POST" action="{{ url_for('registrar_usuario') }}" enctype="multipart/form-data">
                     <div class="form-divs">
-                        <input type="text" id="new-name" class="form-control txt-custom txt-custom-3" placeholder="Nombre Completo--" required>
-                        <input type="text" id="new-username" class="form-control txt-custom txt-custom-3" placeholder="Username--" required>
+                        <input type="text" id="new-name" name="name" class="form-control txt-custom txt-custom-3" placeholder="Nombre Completo--" required>
+                        <input type="text" id="new-username" name="username-user" class="form-control txt-custom txt-custom-3" placeholder="Username--" required>
                     </div>
                     <br>
                     <div class="form-divs">
-                        <input type="text" id="new-phone" class="form-control txt-custom txt-custom-3" placeholder="Teléfono--" required>
-                        <select class="form-control txt-custom txt-custom-3" aria-label="Default select example" required>
+                        <input type="text" id="new-phone" name="phone" class="form-control txt-custom txt-custom-3" placeholder="Teléfono--" required>
+                        <select name="country" class="form-control txt-custom txt-custom-3" aria-label="Selecciona tu país" required>
                             <option hidden>País--</option>
                             <option value="Perú">Perú</option>
                             <option value="Argentina">Argentina</option>
@@ -55,8 +61,8 @@
                     </div>
                     <br>
                     <div class="form-divs">
-                        <input type="date" class="form-control txt-custom txt-custom-3" placeholder="Fecha Nac.--" required>
-                        <select class="form-control txt-custom txt-custom-3" aria-label="Default select example" required>
+                        <input type="date" name="birth_date" class="form-control txt-custom txt-custom-3" placeholder="Fecha Nac.--" required>
+                        <select name="gender" class="form-control txt-custom txt-custom-3" aria-label="Selecciona tu género" required>
                             <option hidden>Género--</option>
                             <option value="masculino">Masculino</option>
                             <option value="femenino">Femenino</option>
@@ -64,51 +70,52 @@
                     </div>
                     <br>
                     <div class="form-divs">
-                        <input type="email" id="new-email" class="form-control txt-custom txt-custom-3" placeholder="Correo Electrónico--" required>
+                        <input type="email" id="new-email" name="email" class="form-control txt-custom txt-custom-3" placeholder="Correo Electrónico--" required>
                     </div>
                     <br>
                     <div class="form-divs">
-                        <input type="password" id="new-password" class="form-control txt-custom txt-custom-3" placeholder="Contraseña--" required>
-                        <input type="password" id="new-confirm-password" class="form-control txt-custom txt-custom-3" placeholder="Confirmar Contraseña--" required>
+                        <input type="password" id="new-password" name="password" class="form-control txt-custom txt-custom-3" placeholder="Contraseña--" required>
+                        <input type="password" id="new-confirm-password" name="confirm_password" class="form-control txt-custom txt-custom-3" placeholder="Confirmar Contraseña--" required>
                     </div>
                     <br>
                     <div class="form-divs">
                         <label class="txt-custom label-custom">
-                            <input type="checkbox" id="terms" required>
+                            <input type="checkbox" id="terms" name="terms" required>
                             Acepto los Términos y Condiciones de Uso
                         </label>
                     </div>
-                    <hr>
-                    <button type="button" class="btn btn-custom txt-custom-3" onclick="validarRegistro()">Crear Cuenta</button>
+                    <br>
+                    <button type="submit" class="btn btn-custom txt-custom-3">Crear Cuenta</button>
                 </form>
+                
                 <div class="divider">
                     <hr>
                     <span>o</span>
                     <hr>
                 </div>
                 <div class="form-social-options">
-                    <button class="btn btn-custom-2">
+                    <button class="btn btn-custom-2" aria-label="Registrarse con Google">
                         <i class="fa-brands fa-google"></i>
                     </button>
-                    <button class="btn btn-custom-2">
+                    <button class="btn btn-custom-2" aria-label="Registrarse con Facebook">
                         <i class="fa-brands fa-facebook-f"></i>
                     </button>
-                    <button class="btn btn-custom-2">
+                    <button class="btn btn-custom-2" aria-label="Registrarse con Discord">
                         <i class="fa-brands fa-discord"></i>
                     </button>
-                    <button class="btn btn-custom-2">
+                    <button class="btn btn-custom-2" aria-label="Registrarse con Steam">
                         <i class="fa-brands fa-steam"></i>
                     </button>
                 </div>
                 <div class="form-links-options-2">
-                    <a href="iniciar-sesion.html" class="enlaces">Ya tengo cuenta</a>
+                    <a href="{{ url_for('iniciar_sesion') }}" class="enlaces">Ya tengo cuenta</a>
                 </div>
             </div>
         </div>
     </main>
     <footer>
         <div id="main-end">
-            &nbsp;
+             
         </div>
         <div id="copyright">
             <p>
@@ -133,7 +140,7 @@
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

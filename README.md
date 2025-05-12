@@ -1,2 +1,0 @@
-# PixelLoot
-guerra infiel
