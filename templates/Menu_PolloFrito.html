@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Juegos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos3.css') }}">
+</head>
+<body>
+
+  <header class="header-menu">
+    <div class="logo">🎮 PixelLoot</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('ruta_agregar') }}" class="nav-menu-links">Registrar Juego</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenido-principal">
+    <h1>Bienvenido al Panel de Juegos</h1>
+    <p>Usa las opciones del menú superior para gestionar tus videojuegos.</p>
+
+    <br><br><br>
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for juego in Menu_PolloFrito %}
+            <tr>
+                <td>{{juego[0]}}</td>
+                <td>{{juego[1]}}</td>
+                <td>{{juego[2]}}</td>
+                <td>{{juego[3]}}</td>
+                <td>
+                    <!-- Aquí puedes agregar un botón de editar si lo deseas -->
+                </td>
+                <td>
+                    <form action="{{url_for('eliminar_juego')}}" method="POST">
+                        <input type="hidden" name="id" value="{{juego[0]}}">
+                        <button class="button is-danger">X</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    
+
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 PixelLoot - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>

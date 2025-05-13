@@ -3,35 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Juego</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos3.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Agregar Juego</h1>
-    <form action="/agregar_juego" method="post" enctype="multipart/form-data">
-        <label>Nombre del juego:</label>
-        <input type="text" name="nombre" required><br>
 
-        <label>Precio:</label>
-        <input type="number" step="0.01" name="precio" required><br>
+    <header class="header-menu">
+        <div class="logo">RetroGames</div>
+        <ul class="nav-links">
+            <li><a href="/" class="btn-nav">Inicio</a></li>
+            <li><a href="{{ url_for('Menu_PolloFrito') }}" class="nav-menu-links">Menu</a></li>
+            <li><a href="/contacto" class="btn-nav">Contacto</a></li>
+        </ul>
+    </header>
 
-        <label>Imagen principal:</label>
-        <input type="file" name="imagen" required><br>
+    <main class="form-container">
+        <h1>Agregar Juego</h1>
+        <form action="/agregar_juego" method="post" enctype="multipart/form-data">
+            <label>Nombre del juego:</label>
+            <input type="text" name="nombre" required>
 
-        <label>Imagen extra 1:</label>
-        <input type="file" name="imagene1"><br>
+            <label>Precio:</label>
+            <input type="number" step="0.01" name="precio" required>
 
-        <label>Imagen extra 2:</label>
-        <input type="file" name="imagene2"><br>
+            <label>Imagen principal:</label>
+            <input type="file" name="imagen" required>
 
-        <label>Imagen extra 3:</label>
-        <input type="file" name="imagene3"><br>
+            <label>Imagen extra 1:</label>
+            <input type="file" name="imagene1">
 
-        <label>Cantidad:</label>
-        <input type="number" name="cantidad" required><br>
+            <label>Imagen extra 2:</label>
+            <input type="file" name="imagene2">
 
-        <label>Descripción:</label>
-        <textarea name="descripcion" required></textarea><br>
+            <label>Imagen extra 3:</label>
+            <input type="file" name="imagene3">
 
-        <button type="submit">Agregar</button>
-    </form>
+            <label>Cantidad:</label>
+            <input type="number" name="cantidad" required>
+
+            <label>Descripción:</label>
+            <textarea name="descripcion" required></textarea>
+            <button type="submit">Agregar</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        &copy; 2025 RetroGames. Todos los derechos reservados.
+    </footer>
+
 </body>
 </html>

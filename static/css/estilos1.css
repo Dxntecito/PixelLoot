@@ -392,3 +392,57 @@ footer {
         line-height: 50px;
     }
 }
+
+
+/* Añadir a estilo1.css o estilo2.css */
+
+.header-menu {
+    background-color: #111827;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    font-family: 'Press Start 2P', monospace;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-links li a.btn-nav {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links li a.btn-nav:hover {
+    background-color: #1e40af;
+  }
+  
+  .contenido-principal {
+    text-align: center;
+    margin-top: 4rem;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #1f2937;
+    padding: 2rem;
+  }
+  
+  .footer {
+    background-color: #111827;
+    color: #ccc;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 4rem;
+  }
+  
