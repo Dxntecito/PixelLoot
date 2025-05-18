@@ -1,32 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PixelLoot | Confirmar Compra</title>
     <!-- SEO -->
-    <meta name="description" content="Confirma tu compra en PixelLoot y paga de forma segura con tarjeta.">
-    <meta name="keywords" content="PixelLoot, carrito, pago, tarjeta, videojuegos">
+    <meta name="description" content="Confirma tu compra en PixelLoot y paga de forma segura con tarjeta." />
+    <meta name="keywords" content="PixelLoot, carrito, pago, tarjeta, videojuegos" />
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <!-- Tipografía Ubuntu -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmarCompraTarjeta.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmarCompraTarjeta.css') }}" />
     <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
+
+    <style>
+        .tarjeta-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .tarjeta-popup {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            width: 360px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tarjeta-visual {
+            width: 320px;
+            height: 200px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .tarjeta-cara {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            color: white;
+            transition: transform 0.6s ease-in-out;
+            background: linear-gradient(135deg, #1f1fff, #0a0a8a);
+        }
+
+        .tarjeta-frente {
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+
+        .tarjeta-reverso {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #333, #111);
+        }
+
+        .tarjeta-visual.volteada .tarjeta-frente {
+            transform: rotateY(180deg);
+        }
+
+        .tarjeta-visual.volteada .tarjeta-reverso {
+            transform: rotateY(360deg);
+            z-index: 3;
+        }
+
+        .tarjeta-cinta {
+            background: #000;
+            height: 40px;
+            margin-top: 20px;
+        }
+
+        .tarjeta-ccv-box {
+            margin-top: 30px;
+            background: white;
+            color: black;
+            padding: 5px 10px;
+            width: 100px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .tarjeta-popup input,
+        .tarjeta-popup select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .tarjeta-botones {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tarjeta-item {
+            padding: 10px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta-item:hover {
+            border-color: #ccc;
+        }
+
+        .tarjeta-item.seleccionada {
+            border-color: #0066ff;
+            background-color: #e6f0ff;
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.3);
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <!-- Div del logo -->
         <div id="caja1">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot"
+                    id="logo-pixel-header" />
             </a>
         </div>
-        
+
         <!-- Botón de menú hamburguesa -->
         <div id="menu-hamburguesa">
             <button id="toggle" aria-label="Abrir menú">
@@ -42,13 +160,21 @@
         <!-- Nav general de página -->
         <nav id="caja2">
             <ul id="nav-menu">
-                <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
-                <li><a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a></li>
-                <li><a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a></li>
-                <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
+                <li>
+                    <a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('tienda') }}" class="nav-menu-links">Tienda</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('sobre_nosotros') }}" class="nav-menu-links">Sobre Nosotros</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a>
+                </li>
             </ul>
         </nav>
-        
+
         <!-- Perfil del usuario -->
         <div id="caja3">
             <a href="#" id="user-icon" aria-label="Abrir menú de usuario">
@@ -61,20 +187,26 @@
         <!-- Sub menú de usuario -->
         <div id="user">
             <ul id="user-menu">
-                <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
-                <li><a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a></li>
-                <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
+                <li>
+                    <a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('carrito') }}" class="user-menu-links">Mi Carrito</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a>
+                </li>
             </ul>
         </div>
     </header>
 
     <main>
         <section class="sec">
-            <h1 style="font-family: eight-bits; font-size: 45px; color: white;">
+            <h1 style="font-family: eight-bits; font-size: 45px; color: white">
                 Confirmación de compra
             </h1>
             <div class="games">
-                <br><br>
+                <br /><br />
                 <table id="carrito-items">
                     <thead>
                         <tr>
@@ -88,23 +220,26 @@
                     <tbody>
                         {% for item in carrito %}
                         <tr>
-                            <td><img src="{{ url_for('static', filename=item.imagen) }}" alt="{{ item.nombre }}" style="width: 50px;"></td>
+                            <td>
+                                <img src="{{ url_for('static', filename=item.imagen) }}" alt="{{ item.nombre }}"
+                                    style="width: 50px" />
+                            </td>
                             <td>{{ item.nombre }}</td>
                             <td>S/. {{ item.precio }}</td>
                             <td>{{ item.cantidad }}</td>
-                            <td>S/. {{ item.precio * item.cantidad }}</td>
+                            <td>S/. {{ (item.precio * item.cantidad) | round(2) }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-            <hr>
+            <hr />
         </section>
 
         <aside>
             <div class="resumen-container">
                 <div class="resumen-header">
-                    <h1 style="margin-top: 50px;">Resumen de tu compra</h1>
+                    <h1 style="margin-top: 50px">Resumen de tu compra</h1>
                     <div class="botones">
                         <button id="btn-detalles">Detalles</button>
                         <button id="btn-pagar">Pagar</button>
@@ -116,7 +251,7 @@
                         <div class="infoCarrito">
                             <div class="subTotalPago">
                                 <span>Sub total</span>
-                                <span id="subTotal">S/. {{ subtotal }}</span>
+                                <span id="subTotal">S/. {{ subtotal | round(2) }}</span>
                             </div>
                             <div class="descuentoPago">
                                 <span>Descuento</span>
@@ -128,42 +263,64 @@
                                 </div>
                                 <div>
                                     <span>S/</span>
-                                    <span id="total-pago-valor">{{ total }}</span>
+                                    <span id="total-pago-valor">{{ total | round(2) }}</span>
                                 </div>
                             </div>
                         </div>
-                        <br>
+                        <br />
                         <div class="container-tarjetas2">
                             <div class="container-top-tarjetas2">
                                 <div class="container-body-tarjetas2">
-                                    <div class="tarjetas-guardadas2">
-                                        <h3>TARJETAS GUARDADAS</h3>
-                                    </div>
-                                    <div class="cajaTarjeta">
-                                        <div id="tarjetas-list">
-                                            {% for tarjeta in tarjetas %}
-                                            <div class="tarjeta-item">
-                                                <p>{{ tarjeta.card_brand }} **** {{ tarjeta.card_last4 }} (Exp. {{ tarjeta.card_exp_month }}/{{ tarjeta.card_exp_year }})</p>
-                                            </div>
-                                            {% endfor %}
+                                    <!-- Sección de tarjetas guardadas y selección -->
+                                    <form action="{{ url_for('confirmar_compra') }}" method="POST">
+                                        <input type="hidden" name="action" value="seleccionar_tarjeta" />
+                                        <div class="tarjetas-guardadas2">
+                                            <h3>Tarjetas guardadas</h3>
+                                            
+                                            {% if tarjetas %}
+                                            <form method="POST" action="{{ url_for('confirmar_compra') }}">
+                                                <input type="hidden" name="action" value="seleccionar_tarjeta">
+
+                                                {% for tarjeta in tarjetas %}
+                                                <div class="tarjeta-opcion">
+                                                    <input type="radio" name="id_tarjeta_seleccionada"
+                                                        value="{{ tarjeta[0] }}" {% if tarjeta_seleccionada==tarjeta[0]
+                                                        %}checked{% endif %}>
+                                                    **** **** **** {{ tarjeta[1] }}
+                                                </div>
+                                                {% endfor %}
+                                            </form>
+                                            {% else %}
+                                            <p>No tienes tarjetas guardadas.</p>
+                                            {% endif %}
                                         </div>
-                                        <form action="{{ url_for('confirmar_compra') }}" method="POST">
-                                            <input type="hidden" name="action" value="add_card">
-                                            <button type="submit" class="addTarjeta" aria-label="Agregar nueva tarjeta">
-                                                <img src="{{ url_for('static', filename='imagenes/metodoPago/agregar-tarjeta.png') }}" alt="Agregar tarjeta">
-                                                <p style="font-size: 14px;">Agregar tarjeta</p>
-                                            </button>
-                                        </form>
+                                    </form>
+
+                                    <!-- Botón para agregar nueva tarjeta -->
+                                    <div class="cajaTarjeta">
+                                        <a href="{{ url_for('tarjeta') }}" class="addTarjeta"
+                                            aria-label="Agregar nueva tarjeta">
+                                            <img src="{{ url_for('static', filename='imagenes/metodoPago/agregar-tarjeta.png') }}"
+                                                alt="Agregar tarjeta" />
+                                            <p style="font-size: 14px;">Agregar tarjeta</p>
+                                        </a>
                                     </div>
                                 </div>
+
+                                <!-- Botón para pagar -->
                                 <div class="botonPagar">
                                     <form action="{{ url_for('confirmar_compra') }}" method="POST">
-                                        <input type="hidden" name="action" value="pay">
-                                        <button type="submit" class="BtnPagar" aria-label="Realizar pago">Pagar</button>
+                                        <input type="hidden" name="action" value="pay" />
+                                        <button type="submit" class="BtnPagar" aria-label="Realizar pago" {% if not
+                                            tarjeta_seleccionada %}disabled{% endif %}>
+                                            Pagar
+                                        </button>
+
                                     </form>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -175,15 +332,19 @@
                     <div class="container-top">
                         <h3>INFORMACIÓN DE TU TARJETA</h3>
                         <form id="payment-form" action="{{ url_for('confirmar_compra') }}" method="POST">
-                            <input type="hidden" name="action" value="add_card">
+                            <input type="hidden" name="action" value="add_card" />
                             <div id="card-element"></div>
                             <div id="card-errors" role="alert"></div>
-                            <button type="submit" class="anadirTarjeta" id="add">Añadir tarjeta</button>
+                            <button type="submit" class="anadirTarjeta" id="add">
+                                Añadir tarjeta
+                            </button>
                         </form>
                     </div>
                 </section>
             </div>
         </section>
+
+
     </main>
 
     <footer>
@@ -196,12 +357,12 @@
                 <i class="fa-solid fa-location-dot"></i>
                 <p>Perú</p>
             </div>
-            <hr>
+            <hr />
             <div id="language" class="sub-setting">
                 <i class="fa-solid fa-language"></i>
                 <p>Español</p>
             </div>
-            <hr>
+            <hr />
             <div id="coin" class="sub-setting">
                 <i class="fa-solid fa-coins"></i>
                 <p>PEN</p>
@@ -211,39 +372,96 @@
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        const stripe = Stripe('{{ stripe_publishable_key }}');
+        const stripe = Stripe("{{ stripe_publishable_key }}");
         const elements = stripe.elements();
-        const card = elements.create('card');
-        card.mount('#card-element');
+        const card = elements.create("card");
+        card.mount("#card-element");
 
-        card.on('change', function(event) {
-            const displayError = document.getElementById('card-errors');
+        card.on("change", function (event) {
+            const displayError = document.getElementById("card-errors");
             if (event.error) {
                 displayError.textContent = event.error.message;
             } else {
-                displayError.textContent = '';
+                displayError.textContent = "";
             }
         });
 
-        const form = document.getElementById('payment-form');
-        form.addEventListener('submit', async function(event) {
+        const form = document.getElementById("payment-form");
+        form.addEventListener("submit", async function (event) {
             event.preventDefault();
             const { paymentMethod, error } = await stripe.createPaymentMethod({
-                type: 'card',
+                type: "card",
                 card: card,
             });
 
             if (error) {
-                document.getElementById('card-errors').textContent = error.message;
+                document.getElementById("card-errors").textContent = error.message;
             } else {
-                const actionInput = document.createElement('input');
-                actionInput.type = 'hidden';
-                actionInput.name = 'payment_method';
+                const actionInput = document.createElement("input");
+                actionInput.type = "hidden";
+                actionInput.name = "payment_method";
                 actionInput.value = paymentMethod.id;
                 form.appendChild(actionInput);
                 form.submit();
             }
         });
+
+        document
+            .getElementById("btn-mostrar-tarjeta")
+            .addEventListener("click", () => {
+                document.getElementById("tarjeta-visual-contenedor").style.display =
+                    "flex";
+            });
+
+        function cerrarTarjeta() {
+            document.getElementById("tarjeta-visual-contenedor").style.display =
+                "none";
+        }
+
+        function actualizarNumero(valor) {
+            const limpio = valor.replace(/\D/g, "").slice(0, 16);
+            const formateado = limpio.replace(/(.{4})/g, "$1 ").trim();
+            document.getElementById("vista-numero").textContent = formateado.padEnd(
+                19,
+                "#"
+            );
+        }
+
+        function actualizarNombre(valor) {
+            document.getElementById("vista-nombre").textContent =
+                valor.toUpperCase() || "NOMBRE APELLIDO";
+        }
+
+        function actualizarFecha(valor) {
+            document.getElementById("vista-fecha").textContent = valor || "MM/AA";
+        }
+
+        const tarjeta = document.getElementById("tarjeta");
+        const ccvInput = document.querySelector('input[name="ccv"]');
+
+        ccvInput.addEventListener("focus", () => {
+            tarjeta.classList.add("volteada");
+        });
+
+        ccvInput.addEventListener("blur", () => {
+            tarjeta.classList.remove("volteada");
+        });
+
+        ccvInput.addEventListener("input", (e) => {
+            const valor = e.target.value.replace(/\D/g, "").slice(0, 3);
+            document.getElementById("vista-ccv").textContent = valor.padEnd(3, "•");
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('input[name="id_tarjeta_seleccionada"]').forEach(function (radio) {
+                radio.addEventListener("change", function () {
+                    console.log("Tarjeta seleccionada:", this.value); // 🔍 DEBUG
+                    this.closest("form").submit();
+                });
+            });
+        });
+
     </script>
 </body>
+
 </html>

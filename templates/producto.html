@@ -127,12 +127,12 @@
         }
 
         .tarjeta-similar img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
 
         .etiqueta-descuento {
             position: absolute;
@@ -213,9 +213,6 @@
             transition: all 0.3s ease;
             transform: translateY(100%);
         }
-
-
-        
     </style>
 </head>
 
@@ -259,22 +256,25 @@
     </header>
 
     <main>
-            <div class="producto-container">
-                <div class="producto-imagen">
-                    <img class="img-principal" id="imagen-principal" src="{{ '/' + juego[4] }}" alt="{{ juego[1] }}">
+        <div class="producto-container">
+            <div class="producto-imagen">
+                <img class="img-principal" id="imagen-principal" src="{{ '/' + juego[4] }}" alt="{{ juego[1] }}">
 
-                    <div class="producto-miniaturas">
-            {% if juego[5] %}
-            <img src="{{ url_for('static', filename=juego[5]) }}" alt="Miniatura 1" class="miniatura-img" onclick="cambiarImagen(this)">
-            {% endif %}
-            {% if juego[6] %}
-            <img src="{{ url_for('static', filename=juego[6]) }}" alt="Miniatura 2" class="miniatura-img" onclick="cambiarImagen(this)">
-            {% endif %}
-            {% if juego[7] %}
-            <img src="{{ url_for('static', filename=juego[7]) }}" alt="Miniatura 3" class="miniatura-img" onclick="cambiarImagen(this)">
-            {% endif %}
-        </div> 
+                <div class="producto-miniaturas">
+                    {% if juego[5] %}
+                    <img src="{{ url_for('static', filename=juego[5]) }}" alt="Miniatura 1" class="miniatura-img"
+                        onclick="cambiarImagen(this)">
+                    {% endif %}
+                    {% if juego[6] %}
+                    <img src="{{ url_for('static', filename=juego[6]) }}" alt="Miniatura 2" class="miniatura-img"
+                        onclick="cambiarImagen(this)">
+                    {% endif %}
+                    {% if juego[7] %}
+                    <img src="{{ url_for('static', filename=juego[7]) }}" alt="Miniatura 3" class="miniatura-img"
+                        onclick="cambiarImagen(this)">
+                    {% endif %}
                 </div>
+            </div>
 
             <div class="producto-detalle">
                 <h1>{{ juego[1] }}</h1>
@@ -283,11 +283,10 @@
                     <p><strong>Precio:</strong> S/. {{ juego[2] }}</p>
                     <p><strong>Stock:</strong> {{ juego[8] }}</p>
                 </div>
-                <form action="#" method="post">
-                    <button type="submit" class="btn btn-success btn-agregar">
-                        Agregar al carrito
-                    </button>
+                <form action="{{ url_for('ruta_agregar_al_carrito', juego_id=juego[0]) }}" method="post">
+                    <button type="submit" class="btn btn-success btn-agregar">Agregar al carrito</button>
                 </form>
+
                 <a href="#" class="btn btn-outline-light btn-agregar">
                     <img src="{{ url_for('static', filename='imagenes/favorito.png') }}" alt="Favorito" width="20">
                     Añadir a Favoritos
