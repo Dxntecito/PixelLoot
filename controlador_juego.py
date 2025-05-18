@@ -111,6 +111,17 @@ def obtener_juego_por_id(id_juego):
         conexion.close()
 
 
+def listar_juegos():
+    conexion = conectar()
+    juego = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT id, nombre, precio, cantidad FROM juego ")
+        juego = cursor.fetchall()
+    conexion.close()
+    return juego
+
+
+
 def obtener_similares(id_actual):
     conexion = conectar()
     try:
@@ -128,7 +139,30 @@ def obtener_similares(id_actual):
         conexion.close()
 
 
+<<<<<<< HEAD
 def listar_juegos():
+=======
+
+
+
+
+
+def eliminar_juego(id):
+    conexion = conectar()
+    with conexion.cursor() as cursor:
+        cursor.execute("DELETE FROM juego WHERE id = %s", (id,))
+    conexion.commit()
+    conexion.close()
+
+
+
+
+
+
+
+
+def obtener_juegos():
+>>>>>>> 88f9bb2edbfd855a5684da118e9c396375adaa95
     conexion = conectar()
     try:
         with conexion.cursor() as cursor:

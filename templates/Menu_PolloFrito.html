@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 88f9bb2edbfd855a5684da118e9c396375adaa95
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestión de Juegos</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos3.css') }}">
 </head>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 88f9bb2edbfd855a5684da118e9c396375adaa95
 <body>
 
   <header class="header-menu">
@@ -26,6 +32,7 @@
     <br><br><br>
     <table class="table">
 
+<<<<<<< HEAD
       <thead>
         <tr>
           <th>Código</th>
@@ -63,6 +70,41 @@
 
     </table>
 
+=======
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for juego in Menu_PolloFrito %}
+            <tr>
+                <td>{{juego[0]}}</td>
+                <td>{{juego[1]}}</td>
+                <td>{{juego[2]}}</td>
+                <td>{{juego[3]}}</td>
+                <td>
+                    <!-- Aquí puedes agregar un botón de editar si lo deseas -->
+                </td>
+                <td>
+                    <form action="{{url_for('eliminar_juego')}}" method="POST">
+                        <input type="hidden" name="id" value="{{juego[0]}}">
+                        <button class="button is-danger">X</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    
+>>>>>>> 88f9bb2edbfd855a5684da118e9c396375adaa95
 
 
   </main>
@@ -72,5 +114,9 @@
   </footer>
 
 </body>
+<<<<<<< HEAD
 
 </html>
+=======
+</html>
+>>>>>>> 88f9bb2edbfd855a5684da118e9c396375adaa95

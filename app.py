@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask import Flask, session, redirect, url_for, request, render_template, jsonify, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import date
@@ -29,6 +30,19 @@ from controlador_carrito import (
 from controlador_tarjeta import obtener_tarjetas_por_usuario
 
 
+=======
+from flask import Flask, session, redirect, url_for, request, render_template, flash, jsonify
+from flask_login import login_user, logout_user, login_required, current_user
+from datetime import date
+from bd import conectar
+from controlador_juego import obtener_juegos
+from controlador_juego import agregar_juego
+import controlador_juego
+from controlador_juego import obtener_juego_por_id
+from controlador_juego import obtener_similares
+from controlador_usuario import insertar_usuario,validar_usuario,obtener_datos_completos_usuario,obtener_paises_distintos, editar_informacion
+import pymysql.cursors 
+>>>>>>> 88f9bb2edbfd855a5684da118e9c396375adaa95
 
 app = Flask(__name__)
 app.secret_key = 'tu_clave_secreta_aqui'
@@ -40,6 +54,7 @@ def index():
     print(url_for('carrito'))
     return render_template("index.html")
 
+
 # Rutas del menú principal
 @app.route('/tienda')
 def tienda():
@@ -49,6 +64,7 @@ def tienda():
 @app.route("/sobre-nosotros")
 def sobre_nosotros():
     return render_template("sobre-nosotros.html")
+
 
 @app.route("/soporte")
 def soporte():
@@ -91,6 +107,13 @@ def perfil():
 def cerrar_sesion():
     session.clear()  # elimina todos los datos de sesión
     return redirect(url_for('iniciar_sesion'))
+<<<<<<< HEAD
+=======
+
+@app.route("/carrito")
+def carrito():
+    return render_template("carrito.html")
+>>>>>>> 88f9bb2edbfd855a5684da118e9c396375adaa95
 
 @app.route("/iniciar-sesion", methods=["GET", "POST"])
 def iniciar_sesion():
@@ -208,9 +231,107 @@ def contactanos():
 def historial_compras():
     return render_template("historial-compras.html")
 
-@app.route("/lista-deseos")
+@app.route('/agregar_a_favoritos/<int:juego_id>', methods=['POST'])
+def agregar_a_favoritos(juego_id):
+    if 'usuario_id' not in session:
+        flash('Debes iniciar sesión para añadir a favoritos.')
+        return redirect(url_for('iniciar_sesion'))
+
+    usuario_id = session['usuario_id']
+    conn = conectar()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("""
+                SELECT * FROM favorito WHERE usuariosid_usuario = %s AND juegoid = %s
+            """, (usuario_id, juego_id))
+            existente = cursor.fetchone()
+
+            if not existente:
+                cursor.execute("""
+                    INSERT INTO favorito (usuariosid_usuario, juegoid)
+                    VALUES (%s, %s)
+                """, (usuario_id, juego_id))
+                conn.commit()
+
+        flash('Juego agregado a Favoritos.')
+        return redirect(url_for('detalle_juego', id_juego=juego_id))
+    finally:
+        conn.close()
+
+@app.route('/lista-deseos', methods=['GET', 'POST'])
 def lista_deseos():
-    return render_template("lista-deseos.html")
+    if 'usuario_id' not in session:
+        return redirect(url_for('iniciar_sesion'))
+
+    usuario_id = session['usuario_id']
+    conn = conectar()
+
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+
+            # Si vienen datos por POST (eliminar o añadir al carrito)
+            if request.method == 'POST':
+                action = request.form.get("action")
+                juego_id = request.form.get("product_id")
+
+                if action == "remove":
+                    cursor.execute("""
+                        DELETE FROM favorito 
+                        WHERE usuariosid_usuario = %s AND juegoid = %s
+                    """, (usuario_id, juego_id))
+                    conn.commit()
+
+                elif action == "add_to_cart":
+                    # Obtener o crear carrito
+                    cursor.execute("SELECT id_carrito FROM carrito WHERE usuariosid_usuario = %s", (usuario_id,))
+                    carrito = cursor.fetchone()
+
+                    if not carrito:
+                        cursor.execute("""
+                            INSERT INTO carrito (fecha, usuariosid_usuario) 
+                            VALUES (%s, %s)
+                        """, (date.today(), usuario_id))
+                        conn.commit()
+                        carrito_id = cursor.lastrowid
+                    else:
+                        carrito_id = carrito["id_carrito"]
+
+                    # Verificar si el producto ya está en el carrito
+                    cursor.execute("""
+                        SELECT cantidad 
+                        FROM detalle_carrito 
+                        WHERE juegoid = %s AND carritoid_carrito = %s
+                    """, (juego_id, carrito_id))
+                    detalle = cursor.fetchone()
+
+                    if detalle:
+                        nueva_cantidad = detalle["cantidad"] + 1
+                        cursor.execute("""
+                            UPDATE detalle_carrito 
+                            SET cantidad = %s 
+                            WHERE juegoid = %s AND carritoid_carrito = %s
+                        """, (nueva_cantidad, juego_id, carrito_id))
+                    else:
+                        cursor.execute("""
+                            INSERT INTO detalle_carrito (juegoid, carritoid_carrito, cantidad)
+                            VALUES (%s, %s, 1)
+                        """, (juego_id, carrito_id))
+                    conn.commit()
+
+            # Obtener favoritos actualizados
+            cursor.execute("""
+                SELECT j.id AS product_id, j.nombre, j.precio, j.imagen
+                FROM favorito f
+                JOIN juego j ON f.juegoid = j.id
+                WHERE f.usuariosid_usuario = %s
+            """, (usuario_id,))
+            favoritos = cursor.fetchall()
+
+        return render_template("lista-deseos.html", wishlist=favoritos)
+
+    finally:
+        conn.close()
+
 
 @app.route("/ruleta-game")
 def ruleta_game():
@@ -471,7 +592,7 @@ def resident_evil_4_gold():
 def ruta_agregar():
     if request.method == 'POST':
         resultado = agregar_juego(request)
-        return resultado  # o redirect('/')
+        return redirect(url_for('Menu_PolloFrito'))
     return render_template('agregar_juego.html')
 
 
@@ -482,6 +603,16 @@ def detalle_juego(id_juego):
     similares = obtener_similares(juego[0])  # <-- función nueva
     return render_template('producto.html', juego=juego, similares=similares)
 
+
+@app.route("/Menu_PolloFrito")
+def Menu_PolloFrito():
+    Menu_PolloFrito = controlador_juego.listar_juegos()
+    return render_template("Menu_PolloFrito.html", Menu_PolloFrito=Menu_PolloFrito)
+
+@app.route("/eliminar_juego", methods=["POST"])
+def eliminar_juego():
+    controlador_juego.eliminar_juego(request.form["id"])
+    return redirect("/Menu_PolloFrito")
 
 
 
