@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Juego</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos3.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header-menu">
+        <div class="logo">RetroGames</div>
+        <ul class="nav-links">
+            <li><a href="/" class="btn-nav">Inicio</a></li>
+            <li><a href="{{ url_for('Menu_PolloFrito') }}" class="nav-menu-links">Menu</a></li>
+            <li><a href="/contacto" class="btn-nav">Contacto</a></li>
+        </ul>
+    </header>
+
+    <main class="form-container">
+        <h1>Editar Juego</h1>
+        <form action="/editar_juego/{{ juego[0] }}" method="post" enctype="multipart/form-data">
+            <label>Nombre del juego:</label>
+            <input type="text" name="nombre" value="{{ juego[1] }}" required>
+
+            <label>Precio:</label>
+            <input type="number" step="0.01" name="precio" value="{{ juego[2] }}" required>
+
+            <label>Imagen principal actual:</label>
+            <br>
+            <img src="{{ '/' + juego[4] }}" alt="Imagen actual" width="150"><br>
+            <label>Reemplazar imagen principal:</label>
+            <input type="file" name="imagen">
+
+            <label>Imagen extra 1 actual:</label>
+            {% if juego[5] %}
+            <br><img src="{{ '/' + juego[5] }}" width="100"><br>
+            {% endif %}
+            <input type="file" name="imagene1">
+
+            <label>Imagen extra 2 actual:</label>
+            {% if juego[6] %}
+            <br><img src="{{ '/' + juego[6] }}" width="100"><br>
+            {% endif %}
+            <input type="file" name="imagene2">
+
+            <label>Imagen extra 3 actual:</label>
+            {% if juego[7] %}
+            <br><img src="{{ '/' + juego[7] }}" width="100"><br>
+            {% endif %}
+            <input type="file" name="imagene3">
+
+            <label>Cantidad:</label>
+            <input type="number" name="cantidad" value="{{ juego[8] }}" required>
+
+            <label>Descripción:</label>
+            <textarea name="descripcion" required>{{ juego[9] }}</textarea>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        &copy; 2025 RetroGames. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>

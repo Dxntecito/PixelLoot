@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +13,24 @@
     <!--Tipografía Ubuntu-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
     <!--Slick Carousel y Font Awesome CDN-->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
+
 <body>
     <header>
         <!--Div del logo-->
         <div id="caja1">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot"
+                    id="logo-pixel-header">
             </a>
         </div>
-        
+
         <!--Botón de menú hamburguesa-->
         <div id="menu-hamburguesa">
             <button id="toggle">
@@ -47,7 +52,7 @@
                 <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
-        
+
         <!--Perfil del usuario-->
         <div id="caja3">
             <a href="#" id="user-icon">
@@ -87,35 +92,39 @@
                         </tr>
                     </thead>
                     <tbody>
+>
                         {% if cart %}
-                            {% for item in cart %}
-                            <tr>
-                                <td>
-                                    <img src="{{ url_for('static', filename=item.imagen) }}" alt="{{ item.nombre }}" style="width: 50px;">
-                                    {{ item.nombre }}
-                                </td>
-                                <td>S/. {{ item.precio }}</td>
-                                <td>
-                                    <form action="{{ url_for('carrito') }}" method="POST">
-                                        <input type="hidden" name="action" value="update_quantity">
-                                        <input type="hidden" name="product_id" value="{{ item.product_id }}">
-                                        <input type="number" name="quantity" value="{{ item.cantidad }}" min="0" style="width: 60px;" onchange="this.form.submit()">
-                                    </form>
-                                </td>
-                                <td>S/. {{ item.cantidad * item.precio }}</td>
-                                <td>
-                                    <form action="{{ url_for('carrito') }}" method="POST">
-                                        <input type="hidden" name="action" value="remove">
-                                        <input type="hidden" name="product_id" value="{{ item.product_id }}">
-                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            {% endfor %}
+                        {% for item in cart %}
+                        <tr>
+                            <td>{{ item.nombre }}</td>
+                            <td>S/. {{ item.precio }}</td>
+                            <td>
+                                <form action="{{ url_for('carrito') }}" method="POST"
+                                    style="display: flex; gap: 5px; align-items: center;">
+                                    <input type="hidden" name="action" value="update_quantity">
+                                    <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                                    <button type="submit" name="change" value="decrease"
+                                        class="btn btn-warning btn-sm">-</button>
+                                    <span>{{ item.cantidad }}</span>
+                                    <button type="submit" name="change" value="increase"
+                                        class="btn btn-success btn-sm">+</button>
+                                </form>
+                            </td>
+
+                            <td>S/. {{ (item.cantidad * item.precio) | round(2) }}</td>
+                            <td>
+                                <form action="{{ url_for('carrito') }}" method="POST">
+                                    <input type="hidden" name="action" value="remove">
+                                    <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
                         {% else %}
-                            <tr>
-                                <td colspan="5">Tu carrito está vacío.</td>
-                            </tr>
+                        <tr>
+                            <td colspan="5">Tu carrito está vacío.</td>
+                        </tr>
                         {% endif %}
                     </tbody>
                 </table>
@@ -146,7 +155,7 @@
                             <div class="infoCarrito">
                                 <div class="subTotalPago">
                                     <span>Sub total</span>
-                                    <span id="subTotal">S/. {{ subtotal }}</span>
+                                    <span id="subTotal">S/. {{ subtotal | round(2) }}</span>
                                 </div>
                                 <div class="descuentoPago">
                                     <span>Descuento</span>
@@ -158,7 +167,7 @@
                                     </div>
                                     <div>
                                         <span>S/</span>
-                                        <span id="total-pago-valor">{{ total }}</span>
+                                        <span id="total-pago-valor">{{ total | round(2) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -166,8 +175,10 @@
                             <div class="buyButton">
                                 <a href="{{ url_for('confirmar_compra') }}">
                                     <button class="Btn">Ir a pagar
-                                        <svg class="svg" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 2C6.477 2 2 6.477 2 12c0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm1 15v2h-2v-2c-2.21 0-4-1.79-4-4h2a2 2 0 1 0 4 0 2 2 0 0 0-1.724-1.972L9.027 10.27A3.988 3.988 0 0 1 8 8c0-2.21 1.79-4 4-4v-2h2v2c2.21 0 4 1.79 4 4h-2a2 2 0 1 0-4 0 2 2 0 0 0 1.724 1.972l2.249 1.258A3.988 3.988 0 0 1 16 16c0 2.21-1.79 4-4 4z" />
+                                        <svg class="svg" viewBox="0 0 24 24" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 2C6.477 2 2 6.477 2 12c0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm1 15v2h-2v-2c-2.21 0-4-1.79-4-4h2a2 2 0 1 0 4 0 2 2 0 0 0-1.724-1.972L9.027 10.27A3.988 3.988 0 0 1 8 8c0-2.21 1.79-4 4-4v-2h2v2c2.21 0 4 1.79 4 4h-2a2 2 0 1 0-4 0 2 2 0 0 0 1.724 1.972l2.249 1.258A3.988 3.988 0 0 1 16 16c0 2.21-1.79 4-4 4z" />
                                         </svg>
                                     </button>
                                 </a>
@@ -182,20 +193,21 @@
                     <form action="{{ url_for('carrito') }}" method="POST">
                         <input type="hidden" name="action" value="select_payment">
                         <div style="display: flex; align-items: center; text-align: center;" class="metVisa">
-                            <input class="visa" type="checkbox" name="payment_method" value="visa" {% if payment_method == 'visa' %}checked{% endif %} onchange="this.form.submit()">
-                            <img style="margin-top: 3%;" src="{{ url_for('static', filename='imagenes/metodoPago/VISA.png') }}" alt="Visa">
+                            <input class="visa" type="radio" name="payment_method" value="visa" {% if
+                                payment_method=='visa' %}checked{% endif %} onchange="this.form.submit()">
+                            <img style="margin-top: 3%;"
+                                src="{{ url_for('static', filename='imagenes/metodoPago/VISA.png') }}" alt="Visa">
+                            <strong style="color: whitesmoke;">(Descuento del 10%)</strong>
                         </div>
-                        <div style="display: flex; align-items: center; text-align: center;" class="metPaypal">
-                            <input class="paypal" type="checkbox" name="payment_method" value="paypal" {% if payment_method == 'paypal' %}checked{% endif %} onchange="this.form.submit()">
-                            <img style="margin-top: 3%;" src="{{ url_for('static', filename='imagenes/metodoPago/paypal.png') }}" alt="PayPal">
-                        </div>
-                        <div style="display: flex; align-items: center; text-align: center;" class="metPaysafe">
-                            <input class="paysafe" type="checkbox" name="payment_method" value="paysafe" {% if payment_method == 'paysafe' %}checked{% endif %} onchange="this.form.submit()">
-                            <img style="margin-top: 3%;" src="{{ url_for('static', filename='imagenes/metodoPago/paysafe.png') }}" alt="Paysafe">
-                        </div>
+                        
+                        
                         <div style="display: flex; align-items: center; text-align: center;" class="metMartercard">
-                            <input class="mastercard" type="checkbox" name="payment_method" value="mastercard" {% if payment_method == 'mastercard' %}checked{% endif %} onchange="this.form.submit()">
-                            <img style="margin-top: 3%;" src="{{ url_for('static', filename='imagenes/metodoPago/mastercard.png') }}" alt="Mastercard">
+                            <input class="mastercard" type="radio" name="payment_method" value="mastercard" {% if
+                                payment_method=='mastercard' %}checked{% endif %} onchange="this.form.submit()">
+                            <img style="margin-top: 3%;"
+                                src="{{ url_for('static', filename='imagenes/metodoPago/mastercard.png') }}"
+                                alt="Mastercard">
+                            <strong style="color: whitesmoke;">(Descuento del 10%)</strong>
                         </div>
                     </form>
                 </div>
@@ -203,8 +215,10 @@
                 <div class="buyButton2">
                     <a href="{{ url_for('confirmar_compra') }}">
                         <button class="Btn2">Ir a pagar
-                            <svg class="svg2" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C6.477 2 2 6.477 2 12c0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm1 15v2h-2v-2c-2.21 0-4-1.79-4-4h2a2 2 0 1 0 4 0 2 2 0 0 0-1.724-1.972L9.027 10.27A3.988 3.988 0 0 1 8 8c0-2.21 1.79-4 4-4v-2h2v2c2.21 0 4 1.79 4 4h-2a2 2 0 1 0-4 0 2 2 0 0 0 1.724 1.972l2.249 1.258A3.988 3.988 0 0 1 16 16c0 2.21-1.79 4-4 4z" />
+                            <svg class="svg2" viewBox="0 0 24 24" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.477 2 2 6.477 2 12c0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm1 15v2h-2v-2c-2.21 0-4-1.79-4-4h2a2 2 0 1 0 4 0 2 2 0 0 0-1.724-1.972L9.027 10.27A3.988 3.988 0 0 1 8 8c0-2.21 1.79-4 4-4v-2h2v2c2.21 0 4 1.79 4 4h-2a2 2 0 1 0-4 0 2 2 0 0 0 1.724 1.972l2.249 1.258A3.988 3.988 0 0 1 16 16c0 2.21-1.79 4-4 4z" />
                             </svg>
                         </button>
                     </a>
@@ -219,7 +233,8 @@
                     {% for product in recommended %}
                     <div class="wrapper">
                         <div class="container">
-                            <img class="top" src="{{ url_for('static', filename=product.imagen) }}" alt="{{ product.nombre }}">
+                            <img class="top" src="{{ url_for('static', filename=product.imagen) }}"
+                                alt="{{ product.nombre }}">
                             <div class="bottom">
                                 <div class="left">
                                     <div class="details">
@@ -281,4 +296,5 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scriptTarjeta.js') }}"></script>
 </body>
+
 </html>

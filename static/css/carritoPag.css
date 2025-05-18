@@ -295,6 +295,7 @@ thead {
 #carrito-items {
     width: 100%;
     border-collapse: collapse;
+    
 
 }
 
@@ -470,6 +471,18 @@ thead {
     text-decoration: underline;
     cursor: pointer;
 }
+
+body {
+    background-color: #1D2025; /* tu color de fondo principal */
+    overflow-x: hidden;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 
 
 

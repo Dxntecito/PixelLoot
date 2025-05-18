@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarjeta de Crédito</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tarjeta.css') }}">
+</head>
+<body>
+    <div class="contenedor">
+        <div class="tarjeta" id="tarjeta">
+            <div class="frontal">
+                <h3 class="banco">Banco Virtual</h3>
+                <p class="numero" id="num-tarjeta">#### #### #### ####</p>
+                <p class="titular" id="nombre-tarjeta">NOMBRE DEL TITULAR</p>
+                <p class="fecha" id="fecha-tarjeta">MM/AA</p>
+            </div>
+            <div class="reverso">
+                <div class="banda"></div>
+                <div class="ccv-box">
+                    <label>CCV</label>
+                    <div id="ccv-tarjeta">###</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULARIO que guarda la tarjeta -->
+        <form method="POST" action="{{ url_for('confirmar_compra') }}">
+            <input type="hidden" name="action" value="add_card">
+
+            <label>Número de tarjeta:</label>
+            <input type="text" maxlength="19" id="input-numero" name="numero_tarjeta" placeholder="#### #### #### ####" required>
+
+            <label>Nombre del titular:</label>
+            <input type="text" id="input-nombre" name="nombre_titular" placeholder="Nombre completo" required>
+
+            <label>Fecha de expiración:</label>
+            <input type="month" id="input-fecha" name="fecha_expiracion" required>
+
+            <label>CCV:</label>
+            <input type="text" maxlength="3" id="input-ccv" name="ccv" placeholder="123" required>
+
+            <!-- Tipo de tarjeta (oculto o visible si querés) -->
+            <input type="hidden" name="tipo_tarjeta" value="Visa">
+
+            <div style="display: flex; justify-content: space-between;">
+                <a href="{{ url_for('confirmar_compra') }}">
+                    <button type="button" class="can">Cancelar</button>
+                </a>
+                <button type="submit">Guardar tarjeta</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/tarjeta.js') }}"></script>
+</body>
+</html>
