@@ -1,0 +1,8 @@
+py -3 -m venv .venv
+pip install Flask
+pip install Flask_login
+.venv\Scripts\activate
+pip install pymysql
+pip install reportlab
+pip install secure-smtplib
+pip install python-dotenv

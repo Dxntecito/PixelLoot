@@ -1,0 +1,13 @@
+# Carpetas y archivos innecesarios
+__pycache__/
+*.pyc
+.vscode/
+.venv/
+.env
+
+# Facturas generadas automáticamente
+static/facturas/
+*.pdf
+
+# Archivos del entorno
+.DS_Store

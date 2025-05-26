@@ -1,9 +1,15 @@
-# controlador_juegos.py
 import os
 from bd import conectar
 
-import os
-from bd import conectar
+
+def guardar_imagen(archivo, carpeta_destino='static/imagenes'):
+    if archivo and archivo.filename:
+        os.makedirs(carpeta_destino, exist_ok=True)
+        ruta = os.path.join(carpeta_destino, archivo.filename)
+        archivo.save(ruta)
+        return ruta.replace("\\", "/")
+    return None
+
 
 def agregar_juego(request):
     nombre = request.form['nombre']
@@ -11,29 +17,11 @@ def agregar_juego(request):
     cantidad = request.form['cantidad']
     descripcion = request.form['descripcion']
 
-    # Obtener imágenes
-    imagen = request.files.get('imagen')
-    imagene1 = request.files.get('imagene1')
-    imagene2 = request.files.get('imagene2')
-    imagene3 = request.files.get('imagene3')
-
-    # Ruta base
-    carpeta_destino = 'static/imagenes'
-    os.makedirs(carpeta_destino, exist_ok=True)
-
-    # Función auxiliar para guardar imagen
-    def guardar_imagen(archivo):
-        if archivo and archivo.filename:
-            ruta = os.path.join(carpeta_destino, archivo.filename)
-            archivo.save(ruta)
-            return ruta.replace("\\", "/")
-        return None
-
-    # Guardar cada imagen si existe
-    ruta_imagen = guardar_imagen(imagen)
-    ruta_imagene1 = guardar_imagen(imagene1)
-    ruta_imagene2 = guardar_imagen(imagene2)
-    ruta_imagene3 = guardar_imagen(imagene3)
+    # Imágenes
+    ruta_imagen = guardar_imagen(request.files.get('imagen'))
+    ruta_imagene1 = guardar_imagen(request.files.get('imagene1'))
+    ruta_imagene2 = guardar_imagen(request.files.get('imagene2'))
+    ruta_imagene3 = guardar_imagen(request.files.get('imagene3'))
 
     if ruta_imagen:
         conexion = conectar()
@@ -44,7 +32,8 @@ def agregar_juego(request):
                         nombre, precio, estado, imagen, imagene1, imagene2, imagene3, cantidad, descripcion_juego
                     ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
-                    nombre, precio, 1, ruta_imagen, ruta_imagene1, ruta_imagene2, ruta_imagene3, cantidad, descripcion
+                    nombre, precio, 1, ruta_imagen, ruta_imagene1,
+                    ruta_imagene2, ruta_imagene3, cantidad, descripcion
                 ))
                 conexion.commit()
             return "Juego agregado con éxito"
@@ -55,8 +44,58 @@ def agregar_juego(request):
     return "No se encontró la imagen principal"
 
 
+def editar_juego(id_juego, request):
+    nombre = request.form['nombre']
+    precio = request.form['precio']
+    cantidad = request.form['cantidad']
+    descripcion = request.form['descripcion']
+
+    ruta_imagen = guardar_imagen(request.files.get('imagen'))
+    ruta_imagene1 = guardar_imagen(request.files.get('imagene1'))
+    ruta_imagene2 = guardar_imagen(request.files.get('imagene2'))
+    ruta_imagene3 = guardar_imagen(request.files.get('imagene3'))
+
+    conexion = conectar()
+    try:
+        with conexion.cursor() as cursor:
+            cursor.execute("""
+                UPDATE juego SET
+                    nombre = %s,
+                    precio = %s,
+                    cantidad = %s,
+                    descripcion_juego = %s
+                WHERE id = %s
+            """, (nombre, precio, cantidad, descripcion, id_juego))
+
+            if ruta_imagen:
+                cursor.execute("UPDATE juego SET imagen = %s WHERE id = %s", (ruta_imagen, id_juego))
+            if ruta_imagene1:
+                cursor.execute("UPDATE juego SET imagene1 = %s WHERE id = %s", (ruta_imagene1, id_juego))
+            if ruta_imagene2:
+                cursor.execute("UPDATE juego SET imagene2 = %s WHERE id = %s", (ruta_imagene2, id_juego))
+            if ruta_imagene3:
+                cursor.execute("UPDATE juego SET imagene3 = %s WHERE id = %s", (ruta_imagene3, id_juego))
+
+            conexion.commit()
+            return True
+    except Exception as e:
+        print(f"Error al editar juego: {e}")
+        return False
+    finally:
+        conexion.close()
 
 
+def obtener_juegos():
+    conexion = conectar()
+    try:
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT * FROM juego WHERE estado = 1")
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Error al obtener juegos: {e}")
+        return []
+    finally:
+        conexion.close()
 
 
 def obtener_juego_por_id(id_juego):
@@ -89,30 +128,26 @@ def obtener_similares(id_actual):
         conexion.close()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def obtener_juegos():
+def listar_juegos():
     conexion = conectar()
     try:
-        juegos = []
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT * From juego WHERE estado = 1")
-            juegos = cursor.fetchall()
-            return juegos
+            cursor.execute("SELECT id, nombre, precio, cantidad FROM juego")
+            return cursor.fetchall()
     except Exception as e:
-        print(f"Error al obtener juegos: {e}")
+        print("Error al listar juegos:", e)
         return []
+    finally:
+        conexion.close()
+
+
+def eliminar_juego(id):
+    conexion = conectar()
+    try:
+        with conexion.cursor() as cursor:
+            cursor.execute("DELETE FROM juego WHERE id = %s", (id,))
+            conexion.commit()
+    except Exception as e:
+        print(f"Error al eliminar juego: {e}")
     finally:
         conexion.close()

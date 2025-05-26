@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>PixelLoot | {{ juego[1] }}</title>
+    <script src="https://kit.fontawesome.com/8e044f2531.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos1.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
+    
     <style>
         body {
             background-color: #1c1c1c;
@@ -127,12 +129,12 @@
         }
 
         .tarjeta-similar img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
 
         .etiqueta-descuento {
             position: absolute;
@@ -213,26 +215,31 @@
             transition: all 0.3s ease;
             transform: translateY(100%);
         }
-
-
-        
     </style>
 </head>
 
 <body>
     <header>
+        <!--Div del logo-->
         <div id="caja1">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot"
-                    id="logo-pixel-header">
+                <img src="{{ url_for('static', filename='imagenes/logo_pxl.jpg') }}" alt="pixel_loot" id="logo-pixel-header">
             </a>
         </div>
+        
+        <!--Botón de menú hamburguesa-->
         <div id="menu-hamburguesa">
             <button id="toggle">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
-        <div id="responsive-menu"></div>
+
+        <!--Menú desplegable-->
+        <div id="responsive-menu">
+            <!-- contenido del menú responsive -->
+        </div>
+
+        <!--Nav general de página-->
         <nav id="caja2">
             <ul id="nav-menu">
                 <li><a href="{{ url_for('index') }}" class="nav-menu-links">Novedades</a></li>
@@ -241,6 +248,8 @@
                 <li><a href="{{ url_for('soporte') }}" class="nav-menu-links">Soporte</a></li>
             </ul>
         </nav>
+        
+        <!--Perfil del usuario-->
         <div id="caja3">
             <a href="#" id="user-icon">
                 <i class="fa-solid fa-user"></i>
@@ -249,6 +258,7 @@
         <div id="overlay"></div>
         <div id="circular-animation"></div>
         <div id="circular-animation-message">Ingresa a tu carrito</div>
+        <!--Sub menú de usuario-->
         <div id="user">
             <ul id="user-menu">
                 <li><a href="{{ url_for('perfil') }}" class="user-menu-links">Mi Perfil</a></li>
@@ -256,25 +266,27 @@
                 <li><a href="{{ url_for('iniciar_sesion') }}" class="user-menu-links">Cerrar Sesión</a></li>
             </ul>
         </div>
-    </header>
-
+    </header>  
     <main>
-            <div class="producto-container">
-                <div class="producto-imagen">
-                    <img class="img-principal" id="imagen-principal" src="{{ '/' + juego[4] }}" alt="{{ juego[1] }}">
+        <div class="producto-container">
+            <div class="producto-imagen">
+                <img class="img-principal" id="imagen-principal" src="{{ '/' + juego[4] }}" alt="{{ juego[1] }}">
 
-                    <div class="producto-miniaturas">
-            {% if juego[5] %}
-            <img src="{{ url_for('static', filename=juego[5]) }}" alt="Miniatura 1" class="miniatura-img" onclick="cambiarImagen(this)">
-            {% endif %}
-            {% if juego[6] %}
-            <img src="{{ url_for('static', filename=juego[6]) }}" alt="Miniatura 2" class="miniatura-img" onclick="cambiarImagen(this)">
-            {% endif %}
-            {% if juego[7] %}
-            <img src="{{ url_for('static', filename=juego[7]) }}" alt="Miniatura 3" class="miniatura-img" onclick="cambiarImagen(this)">
-            {% endif %}
-        </div> 
+                <div class="producto-miniaturas">
+                    {% if juego[5] %}
+                    <img src="{{ url_for('static', filename=juego[5]) }}" alt="Miniatura 1" class="miniatura-img"
+                        onclick="cambiarImagen(this)">
+                    {% endif %}
+                    {% if juego[6] %}
+                    <img src="{{ url_for('static', filename=juego[6]) }}" alt="Miniatura 2" class="miniatura-img"
+                        onclick="cambiarImagen(this)">
+                    {% endif %}
+                    {% if juego[7] %}
+                    <img src="{{ url_for('static', filename=juego[7]) }}" alt="Miniatura 3" class="miniatura-img"
+                        onclick="cambiarImagen(this)">
+                    {% endif %}
                 </div>
+            </div>
 
             <div class="producto-detalle">
                 <h1>{{ juego[1] }}</h1>
@@ -283,11 +295,10 @@
                     <p><strong>Precio:</strong> S/. {{ juego[2] }}</p>
                     <p><strong>Stock:</strong> {{ juego[8] }}</p>
                 </div>
-                <form action="#" method="post">
-                    <button type="submit" class="btn btn-success btn-agregar">
-                        Agregar al carrito
-                    </button>
+                <form action="{{ url_for('ruta_agregar_al_carrito', juego_id=juego[0]) }}" method="post">
+                    <button type="submit" class="btn btn-success btn-agregar">Agregar al carrito</button>
                 </form>
+
                 <a href="#" class="btn btn-outline-light btn-agregar">
                     <img src="{{ url_for('static', filename='imagenes/favorito.png') }}" alt="Favorito" width="20">
                     Añadir a Favoritos
@@ -394,9 +405,8 @@
             }, 2000);
         }
     </script>
-
-
-
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scriptPrincipal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
-
 </html>

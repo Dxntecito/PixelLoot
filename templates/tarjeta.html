@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Tarjeta de Crédito</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tarjeta.css') }}" />
+</head>
+<body>
+    <div class="contenedor">
+        <div class="tarjeta" id="tarjeta">
+            <div class="frontal">
+                <h3 class="banco">Banco Virtual</h3>
+                <p class="numero" id="num-tarjeta">#### #### #### ####</p>
+                <p class="titular" id="nombre-tarjeta">NOMBRE DEL TITULAR</p>
+                <p class="fecha" id="fecha-tarjeta">MM/AA</p>
+            </div>
+            <div class="reverso">
+                <div class="banda"></div>
+                <div class="ccv-box">
+                    <label>CCV</label>
+                    <div id="ccv-tarjeta">###</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULARIO que guarda la tarjeta -->
+        <form method="POST" action="{{ url_for('tarjeta') }}">
+            <input type="hidden" name="action" value="add_card" />
+
+            <label for="input-numero">Número de tarjeta:</label>
+            <input type="text" maxlength="19" id="input-numero" name="numero_tarjeta" placeholder="#### #### #### ####"
+                pattern="\d{4}[\s]?\d{4}[\s]?\d{4}[\s]?\d{4}" required />
+
+            <label for="input-nombre">Nombre del titular:</label>
+            <input type="text" id="input-nombre" name="nombre_titular" maxlength="50" required />
+
+            <label for="input-fecha">Fecha de expiración:</label>
+            <input type="month" id="input-fecha" name="fecha_expiracion" required />
+
+            <label for="input-ciudad">Ciudad:</label>
+            <input type="text" id="input-ciudad" name="ciudad" maxlength="100" required />
+
+            <label for="input-ccv">CCV:</label>
+            <input type="text" id="input-ccv" name="ccv" maxlength="3" pattern="\d{3}" placeholder="123" required />
+
+            <label for="input-tipo">Tipo de tarjeta:</label>
+            <select id="input-tipo" name="tipo_tarjeta" required>
+                <option value="0">Visa</option>
+                <option value="1">MasterCard</option>
+                <option value="2">Amex</option>
+                <option value="3">Diners Club</option>
+                <option value="4">Discover</option>
+            </select>
+
+            <div style="display: flex; justify-content: space-between">
+                <a href="{{ url_for('confirmar_compra') }}">
+                    <button type="button" class="can">Cancelar</button>
+                </a>
+                <button type="submit">Guardar tarjeta</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/tarjeta.js') }}"></script>
+</body>
+</html>

@@ -301,7 +301,7 @@ main {
         text-align: center !important;
     }
 
-    .resumen-header .botones{
+    .resumen-header .botones {
         display: none !important;
     }
 
@@ -312,7 +312,7 @@ main {
         display: block;
     }
 
-    .infoCarrito div{
+    .infoCarrito div {
         margin-top: 20px;
         margin-bottom: 20px;
     }
@@ -320,7 +320,7 @@ main {
     .infoCarrito div span {
         font-size: 25px !important;
         color: white;
-        
+
     }
 
     .subTotalPago span {
@@ -359,7 +359,7 @@ main {
         display: none;
     }
 
-    .container-tarjetas2{
+    .container-tarjetas2 {
         display: flex;
         justify-content: center;
         margin-top: 1%;
@@ -367,39 +367,34 @@ main {
         margin-left: 8%;
     }
 
-    .tarjetas-guardadas2{
-        display: flex;
-        justify-content: center;
-        
-    }
 
-    .container-top-tarjetas2{
+
+    .container-top-tarjetas2 {
         display: block !important;
     }
 
-    .container-top-tarjetas2 .botonPagar{
+    .container-top-tarjetas2 .botonPagar {
         display: flex;
-        margin-left: -20%;
     }
 
-    .tarjetas-guardadas2 h3{
+    .tarjetas-guardadas2 h3 {
         background-color: white !important;
         width: auto !important;
         border-radius: 10px;
         height: auto !important;
     }
 
-    .cajaTarjeta{
+    .cajaTarjeta {
         width: 100%;
         display: block !important;
     }
 
-    #tarjetas-list{
+    #tarjetas-list {
         display: block !important;
         margin-left: 10%;
     }
 
-    .cajaTarjeta .addTarjeta{
+    .cajaTarjeta .addTarjeta {
         display: flex;
         margin-left: -5%;
         align-items: center;
@@ -408,7 +403,7 @@ main {
     }
 
 
-    
+
 
 
     h1 {
@@ -445,8 +440,8 @@ main {
         /* Color verde de fondo */
         border: 1px solid #00ff00;
         /* Color verde del borde */
-        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-        box-shadow: 0 0 5px #00ff00, 0 0 20px #00ff00, 0 0 50px #00ff00,
+        text-shadow: 0 0 2px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+        box-shadow: 0 0 2px #00ff00, 0 0 5px #00ff00, 0 0 10px #00ff00,
             0 0 100px #00ff00;
         /* Sombras verdes */
     }
@@ -973,7 +968,7 @@ footer {
             grid-area: form;
         }
 
-        .resumen-header .botones{
+        .resumen-header .botones {
             display: block !important;
         }
 
@@ -1030,7 +1025,7 @@ footer {
             padding: 10px;
             border-radius: 10px 10px 0 0;
             z-index: 999;
-            
+
         }
 
 
@@ -1065,8 +1060,8 @@ footer {
             font-size: 90%;
         }
 
-        .resumenPago{
-            
+        .resumenPago {
+
             justify-content: space-between;
         }
 
@@ -1078,20 +1073,20 @@ footer {
             display: flex !important;
             justify-content: space-between;
             margin-left: 3%;
-            
+
             color: white !important;
         }
 
-        .infoCarrito .subTotalPago div span{
+        .infoCarrito .subTotalPago div span {
             font-size: 1px;
             color: rgb(255, 255, 255) !important;
         }
-        
+
         .infoCarrito .descuentoPago {
             display: flex !important;
             justify-content: space-between;
             margin-left: 3%;
-            
+
             color: white !important;
         }
 
@@ -1099,7 +1094,7 @@ footer {
             display: flex !important;
             justify-content: space-between;
             margin-left: 3%;
-            
+
             color: white !important;
         }
 
@@ -1115,19 +1110,16 @@ footer {
         }
 
 
-        .container-tarjetas2{
+        .container-tarjetas2 {
             width: 100%;
             display: flex !important;
             text-align: center;
             margin-right: 30%;
         }
 
-        .botonPagar{
-            margin-left: -30%;
-        }
-        .addTarjeta{
+        
 
-        }
+
 
 
         /* .resumenPago .descuentoPago{
@@ -1171,13 +1163,13 @@ footer {
         }
     }
 
-    #carrito-items thead tr{
-       display: block !important;
+    #carrito-items thead tr {
+        display: block !important;
     }
 
-    .datosCart{
+    .datosCart {
         display: inline-block;
-        
+
     }
 
     /*Sección Footer*/
@@ -1211,5 +1203,361 @@ footer {
     #setting i {
         line-height: 50px;
     }
-}
 
+    .overlay-tarjeta {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .tarjeta-flotante {
+        background: white;
+        padding: 20px;
+        width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        position: relative;
+        font-family: 'Ubuntu', sans-serif;
+    }
+
+    .tarjeta-visual {
+        background: linear-gradient(135deg, #2c3e50, #3498db);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .tarjeta-visual .numero {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    .tarjeta-visual .info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+    }
+
+    .tarjeta-flotante input,
+    .tarjeta-flotante select {
+        width: 100%;
+        padding: 8px;
+        margin: 6px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .acciones {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .tarjeta-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .tarjeta-popup {
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        width: 360px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .tarjeta-visual {
+        width: 320px;
+        height: 200px;
+        perspective: 1000px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .tarjeta-cara {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+        transition: transform 0.6s ease-in-out;
+        background: linear-gradient(135deg, #1f1fff, #0a0a8a);
+    }
+
+    .tarjeta-frente {
+        z-index: 2;
+        transform: rotateY(0deg);
+    }
+
+    .tarjeta-reverso {
+        transform: rotateY(180deg);
+        background: linear-gradient(135deg, #333, #111);
+    }
+
+    .tarjeta-visual.volteada .tarjeta-frente {
+        transform: rotateY(180deg);
+    }
+
+    .tarjeta-visual.volteada .tarjeta-reverso {
+        transform: rotateY(360deg);
+        z-index: 3;
+    }
+
+    .tarjeta-cinta {
+        background: #000;
+        height: 40px;
+        margin-top: 20px;
+    }
+
+    .tarjeta-ccv-box {
+        margin-top: 30px;
+        background: white;
+        color: black;
+        padding: 5px 10px;
+        width: 100px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .tarjeta-popup input,
+    .tarjeta-popup select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .tarjeta-botones {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .tarjeta-item {
+        padding: 10px;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        transition: all 0.3s ease;
+    }
+
+    .tarjeta-item:hover {
+        border-color: #ccc;
+    }
+
+    .tarjeta-item.seleccionada {
+        border-color: #0066ff;
+        background-color: #e6f0ff;
+        box-shadow: 0 0 10px rgba(0, 102, 255, 0.3);
+    }
+
+    /* NUEVO DISEÑO PARA SELECCIÓN DE TARJETAS */
+    .tarjetas-lista {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .tarjeta-opcion {
+        display: block;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        border-radius: 12px;
+        padding: 12px 15px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    }
+
+
+
+
+    .tarjeta-contenido {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+
+    .container-tarjetas2 .container-top-tarjetas2 .container-body-tarjetas2 .tarjetas-guardadas2 
+    .tarjetas-lista .tarjeta-opcion .tarjeta-contenido .tarjeta-detalles {
+        display: flex;
+        align-items: center;
+        border: 2px solid #ccc;
+        border-radius: 12px;
+        padding: 15px 20px;
+        background-color: #f9f9f9;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        /* 👉 manito */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    
+
+    .tarjeta-opcion:hover {
+        border-color: #4a90e2;
+        background-color: #eef5ff;
+        box-shadow: 0 0 12px rgba(74, 144, 226, 0.3);
+    }
+
+    .tarjeta-opcion.seleccionada {
+        border-color: #0066ff;
+        background-color: #e6f0ff;
+        box-shadow: 0 0 10px rgba(0, 102, 255, 0.3);
+    }
+
+    .tarjeta-contenido {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .tarjeta-contenido i {
+        font-size: 24px;
+        color: #0066ff;
+    }
+
+    .tarjeta-detalles {
+        display: flex;
+        flex-direction: column;
+        color: #333;
+        cursor: pointer;
+    }
+
+    .tarjeta-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .tarjeta-popup {
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        width: 360px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .tarjeta-visual {
+        width: 320px;
+        height: 200px;
+        perspective: 1000px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .tarjeta-cara {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+        transition: transform 0.6s ease-in-out;
+        background: linear-gradient(135deg, #1f1fff, #0a0a8a);
+    }
+
+    .tarjeta-frente {
+        z-index: 2;
+        transform: rotateY(0deg);
+    }
+
+    .tarjeta-reverso {
+        transform: rotateY(180deg);
+        background: linear-gradient(135deg, #333, #111);
+    }
+
+    .tarjeta-visual.volteada .tarjeta-frente {
+        transform: rotateY(180deg);
+    }
+
+    .tarjeta-visual.volteada .tarjeta-reverso {
+        transform: rotateY(360deg);
+        z-index: 3;
+    }
+
+    .tarjeta-cinta {
+        background: #000;
+        height: 40px;
+        margin-top: 20px;
+    }
+
+    .tarjeta-ccv-box {
+        margin-top: 30px;
+        background: white;
+        color: black;
+        padding: 5px 10px;
+        width: 100px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .tarjeta-popup input,
+    .tarjeta-popup select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .tarjeta-botones {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .tarjeta-item {
+        padding: 10px;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        transition: all 0.3s ease;
+    }
+
+    .tarjeta-item:hover {
+        border-color: #ccc;
+    }
+
+    .tarjeta-item.seleccionada {
+        border-color: #0066ff;
+        background-color: #e6f0ff;
+        box-shadow: 0 0 10px rgba(0, 102, 255, 0.3);
+    }
+}
